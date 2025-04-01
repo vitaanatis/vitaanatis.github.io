@@ -56,11 +56,21 @@
       text-align: center;
       padding: 10px;
       z-index: 100;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
     }
-    .banner a {
-      color: #ff6347;
-      text-decoration: none;
+    .banner button {
+      background-color: #ff6347;
+      color: white;
+      border: 2px solid #ffffff;
+      padding: 10px 15px;
+      border-radius: 5px;
       font-weight: bold;
+      cursor: pointer;
+    }
+    .banner button:hover {
+      background-color: #ff4500;
     }
   </style>
 </head>
@@ -70,11 +80,12 @@
     <div id="time"></div>
   </div>
   <div class="banner">
-    <a href="https://vitaanatis.github.io/helios.html" target="_blank">Helios proxy</a>
-    <a href="https://vitaanatis.github.io/uc" target="_blank">Unblocked Cave</a>
-    <a href="https://vitaanatis.github.io/3kh0" target="_blank">3kh0</a>
-    <a href="https://vitaanatis.github.io/tgh" target="_blank">Gamehub</a>
-    <a href="https://vitaanatis.github.io/incredible-website" target="_blank">Incredible Website</a>
+    <button onclick="window.open('https://vitaanatis.github.io/helios.html', '_blank')">Helios proxy</button>
+    <button onclick="window.open('https://vitaanatis.github.io/uc', '_blank')">Unblocked Cave</button>
+    <button onclick="window.open('https://vitaanatis.github.io/3kh0', '_blank')">3kh0</button>
+    <button onclick="window.open('https://vitaanatis.github.io/tgh', '_blank')">Gamehub</button>
+    <button onclick="window.open('https://vitaanatis.github.io/incredible-website', '_blank')">Incredible Website</button>
+    <button onclick="window.open('https://vitaanatis.github.io/qpg', '_blank')">Quick Play Games</button>
   </div>
   <canvas id="canvas"></canvas>
   <script>
