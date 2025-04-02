@@ -23,31 +23,16 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column; /* Stack clock and text vertically */
+    }
+    .random-text {
+      font-size: 24px; /* Half the size of the time element */
+      margin-top: 10px;
     }
     canvas {
       position: absolute;
       top: 0;
       left: 0;
-    }
-    .ripple {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 100px;
-      height: 100px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      animation: ripple-animation 3s infinite ease-out;
-    }
-    @keyframes ripple-animation {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(5);
-        opacity: 0;
-      }
     }
     .banner {
       width: 100%;
@@ -76,8 +61,8 @@
 </head>
 <body>
   <div class="clock-container">
-    <div class="ripple"></div>
     <div id="time"></div>
+    <div id="random-text" class="random-text"></div>
   </div>
   <div class="banner">
     <button onclick="window.open('https://vitaanatis.github.io/helios.html', '_blank')">Helios proxy</button>
@@ -89,23 +74,10 @@
     <button onclick="window.open('https://vitaanatis.github.io/rena-hub', '_blank')">RenaHub</button>
     <button onclick="window.open('https://vitaanatis.github.io/opium/index.html', '_blank')">Opium</button>
     <button onclick="window.open('https://vitaanatis.github.io/boredashell/index.html', '_blank')">BoredAsHell</button>
+    <button onclick="window.open('https://vitaanatis.github.io/seraph', '_blank')">Seraph</button>
   </div>
   <canvas id="canvas"></canvas>
   <script>
-    // Clock and particle code remain unchanged
-    function updateClock() {
-      const timeElement = document.getElementById('time');
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      hours = hours % 12 || 12;
-      timeElement.textContent = `${hours}:${minutes}:${seconds}`;
-    }
-
-    setInterval(updateClock, 1000);
-    updateClock();
-
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -114,24 +86,71 @@
     const particlesArray = [];
     const numberOfParticles = 100;
     const maxConnectionDistance = 100;
-    let mouse = { x: null, y: null, radius: 150 };
+    const phrases = [
+      "Made by A683",
+      "Central Gaming Site",
+      "Did you know that Vita Anatis is Latin for Life of Duck?",
+      "Hi",
+      ":D",
+      "Check out V-Hub.TS (sites.google.com/view/v-hubts)",
+      "About:blank tabs are great!"
+      "Hi Again"
+      "Dyknow can't see you if you turn your wifi off"
+      "This website is built for iboss"
+      "Go to sites.google.com/view/kduck/px for a proxy- Password: o5i"
+      "Kids are delicious"
+      "We collected all the good gaming sites to put here"
+      "Want us to include your game site? Email a583709.v@gmail.com"
+      "We made Utnium and Nynium"
+      "HIIIIIIIIIIIIIIIIIIIIIIII"
+    ];
 
-    window.addEventListener('mousemove', function(event) {
-      mouse.x = event.x;
-      mouse.y = event.y;
+    function updateClockAndText() {
+      const timeElement = document.getElementById('time');
+      const randomTextElement = document.getElementById('random-text');
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      hours = hours % 12 || 12;
+      timeElement.textContent = `${hours}:${minutes}:${seconds}`;
 
-      const banner = document.querySelector('.banner');
-      const bannerRect = banner.getBoundingClientRect();
-      if (
-        event.clientX >= bannerRect.left &&
-        event.clientX <= bannerRect.right &&
-        event.clientY >= bannerRect.top &&
-        event.clientY <= bannerRect.bottom
-      ) {
-        mouse.x = null;
-        mouse.y = null;
+      const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+      randomTextElement.textContent = randomPhrase;
+    }
+
+    setInterval(updateClockAndText, 1000);
+    updateClockAndText();
+
+    function createRipple() {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      const radius = 10;
+      const maxRadius = 200;
+      let alpha = 1;
+
+      function draw() {
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+        ctx.lineWidth = 2;
+        ctx.stroke();
       }
-    });
+
+      function animate() {
+        radius += 2;
+        alpha -= 0.02;
+        draw();
+
+        if (radius < maxRadius && alpha > 0) {
+          requestAnimationFrame(animate);
+        }
+      }
+
+      animate();
+    }
+
+    setInterval(createRipple, 1000); // Create a ripple every second
 
     class Particle {
       constructor(x, y, directionX, directionY, size, color) {
@@ -151,24 +170,6 @@
       }
 
       update() {
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < mouse.radius + this.size) {
-          if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
-            this.x += 10;
-          }
-          if (mouse.x > this.x && this.x > this.size * 10) {
-            this.x -= 10;
-          }
-          if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
-            this.y += 10;
-          }
-          if (mouse.y > this.y && this.y > this.size * 10) {
-            this.y -= 10;
-          }
-        }
-
         this.x += this.directionX;
         this.y += this.directionY;
 
@@ -183,50 +184,27 @@
       }
     }
 
-    function init() {
+    function initParticles() {
       particlesArray.length = 0;
       for (let i = 0; i < numberOfParticles; i++) {
         const size = Math.random() * 5 + 1;
-        const x = Math.random() * (innerWidth - size * 2) + size;
-        const y = Math.random() * (innerHeight - size * 2) + size;
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
         const directionX = (Math.random() * 0.4) - 0.2;
         const directionY = (Math.random() * 0.4) - 0.2;
         const color = 'red';
-
         particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
       }
     }
 
-    function connectParticles() {
-      for (let a = 0; a < particlesArray.length; a++) {
-        for (let b = a; b < particlesArray.length; b++) {
-          const dx = particlesArray[a].x - particlesArray[b].x;
-          const dy = particlesArray[a].y - particlesArray[b].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < maxConnectionDistance) {
-            ctx.strokeStyle = 'rgba(255, 0, 0, ' + (1 - distance / maxConnectionDistance) + ')';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-            ctx.stroke();
-          }
-        }
-      }
-    }
-
-    function animate() {
-      requestAnimationFrame(animate);
+    function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-      }
-      connectParticles();
+      particlesArray.forEach(particle => particle.update());
+      requestAnimationFrame(animateParticles);
     }
 
-    init();
-    animate();
+    initParticles();
+    animateParticles();
   </script>
 </body>
 </html>
