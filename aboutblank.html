@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About:blank Embedder</title>
+    <style>
+        /* Styling */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(45deg, #b8f1b0, #f7dc6f);
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            margin-bottom: 10px;
+            border: 2px solid #fff;
+            border-radius: 5px;
+        }
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>About:blank Embedder</h1>
+    <input type="text" id="urlInput" placeholder="Enter a URL">
+    <input type="text" id="titleInput" placeholder="Set Tab Title">
+    <button onclick="embedURL()">Go</button>
+
+    <script>
+        function embedURL() {
+            const url = document.getElementById('urlInput').value;
+            const title = document.getElementById('titleInput').value;
+
+            if (url.trim() !== "") {
+                const newWindow = window.open('about:blank'); // Open blank tab
+                const iframe = document.createElement('iframe');
+                iframe.src = url;
+                iframe.style.width = "100%";
+                iframe.style.height = "100vh";
+                iframe.style.border = "none";
+                newWindow.document.body.style.margin = "0";
+                newWindow.document.body.style.overflow = "hidden";
+
+                // Set custom title
+                if (title.trim() !== "") {
+                    newWindow.document.title = title;
+                }
+
+                newWindow.document.body.appendChild(iframe);
+            } else {
+                alert("Please enter a valid URL.");
+            }
+        }
+    </script>
+</body>
+</html>
