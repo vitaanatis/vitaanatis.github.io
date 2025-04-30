@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VHT Proxy Version 18</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fffacd; /* Light yellow */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        #search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            background-color: #ffea00; /* Bright yellow */
+            border-radius: 10px;
+        }
+        #urlInput {
+            width: 60%;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            transition: 0.3s;
+        }
+        #urlInput:focus {
+            box-shadow: 0 0 10px #00ff00; /* Green glow effect */
+        }
+        button {
+            padding: 10px 15px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 20px;
+            background-color: #ffea00; /* Yellow */
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #ffd700; /* Slightly darker yellow */
+        }
+        #iframeContainer {
+            width: 100%;
+            height: calc(100vh - 80px);
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="search-container">
+        <input type="text" id="urlInput" placeholder="Enter URL">
+        <button onclick="loadPage()">Go</button>
+        <button onclick="toggleFullscreen()">Fullscreen</button>
+    </div>
+
+    <iframe id="iframeContainer" srcdoc="
+        <style>
+            .loading-text {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                color: #000;
+                font-weight: bold;
+                text-align: center;
+            }
+            h1 {
+                font-size: 3em;
+            }
+            p {
+                font-size: 1.2em;
+            }
+        </style>
+        <div class='loading-text'>
+            <h1>VHT V.18</h1>
+            <p>This may take long to load. Please be patient.</p>
+            <p>Nothing may happen for the first 10 seconds.</p>
+            
+        </div>" frameborder="0"></iframe>
+
+    <script>
+        function loadPage() {
+            const url = document.getElementById("urlInput").value;
+            if (url) {
+                fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`)
+                    .then(response => {
+                        if (response.ok) return response.json();
+                        throw new Error('Network response was not ok.');
+                    })
+                    .then(data => {
+                        document.getElementById("iframeContainer").srcdoc = data.contents;
+                    })
+                    .catch(error => console.error("Error:", error));
+            }
+        }
+
+        function toggleFullscreen() {
+            const iframe = document.getElementById("iframeContainer");
+            if (!document.fullscreenElement) {
+                iframe.requestFullscreen().catch(err => console.error(`Error attempting fullscreen: ${err.message}`));
+            } else {
+                document.exitFullscreen();
+            }
+        }
+    </script>
+
+</body>
+</html>
