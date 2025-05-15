@@ -1,205 +1,251 @@
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8141368681793084"
-     crossorigin="anonymous"></script>
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vita Anatis</title>
-  <style>
-    body {
-      margin: 0;
-      background: linear-gradient(to bottom, blue, yellow); /* Gradient transition */
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-    .clock-container {
-      position: relative;
-      font-family: 'Arial', sans-serif;
-      font-size: 48px;
-      color: white;
-      text-align: center;
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column; /* Stack clock and text vertically */
-    }
-    .random-text {
-      font-size: 24px; /* Half the size of the time element */
-      margin-top: 10px;
-    }
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-    .banner {
-      width: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      color: white;
-      text-align: center;
-      padding: 10px;
-      z-index: 100;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-    .banner button {
-      background-color: #ff6347;
-      color: white;
-      border: 2px solid #ffffff;
-      padding: 10px 15px;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .banner button:hover {
-      background-color: #ff4500;
-    }
-  </style>
-</head>
-<body>
-  <div class="clock-container">
-    <div id="time"></div>
-    <div id="random-text" class="random-text"></div>
-  </div>
-  <div class="banner">
-    <button onclick="window.open('https://vitaanatis.github.io/gaming-escape', '_blank')">Gaming Escape</button>
-    <button onclick="window.open('https://vitaanatis.github.io/uc', '_blank')">Unblocked Cave</button>
-    <button onclick="window.open('https://vitaanatis.github.io/3kh0', '_blank')">3kh0</button>
-    <button onclick="window.open('https://vitaanatis.github.io/tgh', '_blank')">Gamehub</button>
-    <button onclick="window.open('https://vitaanatis.github.io/incredible-website', '_blank')">Incredible Website</button>
-    <button onclick="window.open('https://vitaanatis.github.io/hub-pro', '_blank')">Hub Pro</button>
-    <button onclick="window.open('https://vitaanatis.github.io/rena-hub', '_blank')">RenaHub</button>
-    <button onclick="window.open('https://vitaanatis.github.io/opium/index.html', '_blank')">Opium</button>
-    <button onclick="window.open('https://vitaanatis.github.io/boredashell/index.html', '_blank')">BoredAsHell</button>
-    <button onclick="window.open('https://vitaanatis.github.io/evowars', '_blank')">Evowars</button>
-    <button onclick="window.open('https://vitaanatis.github.io/hypackel/staticproxy/index.html', '_blank')">Hypackel</button>
-    <button onclick="window.open('https://vitaanatis.github.io/ccported', '_blank')">CCPorted+</button>
-  </div>
-  <canvas id="canvas"></canvas>
-  <script>
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
 
-    const particlesArray = [];
-    const numberOfParticles = 100;
-    const maxConnectionDistance = 100;
-    const phrases = [
-      "Made by A683",
-      "Central Gaming Site",
-      "Did you know that Vita Anatis is Latin for Life of Duck?",
-      "Hi",
-      ":D",
-      "Check out V-Hub.TS (sites.google.com/view/v-hubts)",
-      "About:blank tabs are great!"
-    ];
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="theme-color" content="#ffffff">
+      
+    
+          <link rel="apple-touch-icon" sizes="180x180" href="//cdn.classlink.com/production/launchpad/resources/images/favicon/apple-touch-icon.png">
+          <link rel="icon" type="image/png" href="//cdn.classlink.com/production/launchpad/resources/images/favicon/favicon-32x32.png" sizes="32x32">
+          <link rel="icon" type="image/png" href="//cdn.classlink.com/production/launchpad/resources/images/favicon/favicon-16x16.png" sizes="16x16">
+          <link rel="manifest" href="//cdn.classlink.com/production/launchpad/resources/images/favicon/manifest.json">
+      
+      <link rel="mask-icon" href="//cdn.classlink.com/production/launchpad/resources/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <title>Login</title>
 
-    function updateClockAndText() {
-      const timeElement = document.getElementById('time');
-      const randomTextElement = document.getElementById('random-text');
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      hours = hours % 12 || 12;
-      timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.classlink.com/production/launchpad/resources/bootstrap-3.4.1/css/bootstrap.min.css?t=1747227356386" rel="stylesheet">
+    <link href="//cdn.classlink.com/production/launchpad/resources/font-awesome-4.5.0/css/font-awesome.css?t=1747227356386" rel="stylesheet">
 
-      const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-      randomTextElement.textContent = randomPhrase;
-    }
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
 
-    setInterval(updateClockAndText, 1000);
-    updateClockAndText();
+    <!-- Google Fonts -->
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,300,600' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-    function createRipple() {
-      const x = Math.random() * canvas.width;
-      const y = Math.random() * canvas.height;
-      const radius = 10;
-      const maxRadius = 200;
-      let alpha = 1;
+    <!-- Custom styles for this template -->
+    <link href="//cdn.classlink.com/production/launchpad/css/login/login.css?t=1747227356386" rel="stylesheet">
+    <link href="//cdn.classlink.com/production/framework/stylesheets/cl-lp-loginscreen.css" rel="stylesheet">
 
-      function draw() {
-        ctx.beginPath();
-        ctx.arc(x, y, radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
-        ctx.lineWidth = 2;
-        ctx.stroke();
+    
+      <style>
+      #container-watermark {
+        background-image: url(//clouddrivecdn.classlink.com/BuildingLogo/6020/1659561201626-009cff6f598989662f6290b640cc67ab);
       }
+      </style>
+  
+  
 
-      function animate() {
-        radius += 2;
-        alpha -= 0.02;
-        draw();
+  
+    
+    <style>
+      body {background: url(//filescdn.classlink.com/resources/tenants/3806/backgrounds/1659558139007-3c188e711fec790727c1251689c97981) no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}
+    </style>
+  
+  
 
-        if (radius < maxRadius && alpha > 0) {
-          requestAnimationFrame(animate);
+  
+    <style>
+      
+        .btn-primary.qrcode {
+          background: #26abcd !important;
+          border: solid 1px #26abcd !important;
+          box-shadow: 0px 4px 0px 0px #20748d !important;
+          -webkit-box-shadow: 0px 4px 0px 0px #20748d !important;
+       }
+      .btn-primary.qrcode:hover {background-color: rgba(38, 171, 205, .7) !important;}
+      .btn-primary.qrcode:focus {background-color: rgba(38, 171, 205, .7) !important;}
+      
+       .btn-primary:active {
+          outline: none !important;
+          border: none !important;
+          box-shadow: none !important;
+          -webkit-box-shadow: none !important;
+       }
+       a.link-center{
+        vertical-align: middle;
+        line-height: 2.0;
+       }
+    </style>
+  
+
+  <script type = "text/javascript" >var IdConfig = {"optimized":true,"resmodified":1747227356386,"favmod":"","cloudfronturls":{"clouddesktop":"//cdn.classlink.com/production/launchpad","deskiny":"//dcmtj5kp66sk8.cloudfront.net","userbucket":"//clouddrivecdn.classlink.com","appdefaulticon":"//filescdn.classlink.com/resources","appicon":"//cdn.classlink.com/production/launchpad","launchpadcdn":"//filescdn.classlink.com","faviconfolder":""},"loginpage":true,"proxy":{"token":"","urls":{"classlink":"https://launchpad.classlink.com/proxies/classlink","galaxy":"https://launchpad.classlink.com/proxies/galaxy","galaxy2":"https://launchpad.classlink.com/proxies/galaxy2","api":"https://launchpad.classlink.com/proxies/api","external":"https://launchpad.classlink.com/proxies/external","adconnectorapi":"https://auth.apis.classlink.com"}},"urls":{"base":"https://launchpad.classlink.com","resources":"https://launchpad.classlink.com","launchpad":"https://legacy.classlink.com","serviceurl":"https://login.classlink.net","adconnectorapi":"https://auth.apis.classlink.com","tmsapi":"https://tenant-management-service.classlink.io"},"user":{"default_language":"en"},"csrfToken":"eMs03Rm9-05GF78phfLJdrwKf4Okt6rv4zHI","customlogin":{"schoolcode":"lwsd","customurl":"lwsd","SAMLLoginType":1,"SAMLSPCode":"lwsd"}};</script>
+  </head>
+  <!-- NAVBAR 
+  ================================================== -->
+  
+  <body class="login-bg"></body>
+
+      <input type="hidden" id="os_version" name="os_version" value="5.10.157-139.675.amzn2.x86_64" />
+      <input type="hidden" id="browser_version" name="browser_version" value="136.0.0" />
+      <input type="hidden" id="ip_address" name="ip_address" value="136.228.203.222" />
+      
+      <!-- Start Step2
+      ================================================== -->
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+      
+      
+      <div class="navbar navbar-default navbar-fixed-top2 text-center">
+        
+        
+                <div style="min-height:34px; padding:2px;background:#000000;">
+				<span style="display:inline-block; margin-right:5px;">Go to Vitaanatis.github.io/home.html instead of this.</span>
+                  
+                  <input type="button" onfocus="this.style.opacity='.7';" onblur="this.style.opacity='1';" onclick="javascript:window.open('home.html');" value="Help" class="btn btn-success" />
+                  
+                </div>
+        
+       </div>
+       
+        <div class="container login" id="login_form_action">
+          <div class="container1">
+            
+                <div id='container-watermark' style="opacity:1; z-index:0; position:fixed; background-position: top left;top: 15px; left:10px; "></div>
+            
+            <div class="heading" >
+              
+              <h1 style="color:#ffffff !important">LWSD ClassLink Portal</h1>
+              
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+               
+                <form>
+                  
+                  <div class="form-group username-container">
+                    <input type="text" autofocus="" autocomplete="off" id="username" name="username" class="form-control " placeholder=" " required="required" data-parsley-required-message="Required" data-parsley-id="4590" class="parsley-error"" aria-label="Username">
+                    
+                      <span class="floating-label">Username</span>
+                      
+                  </div>
+                  
+                  <div class="form-group password-row-container">
+                    <div class="form-group password-field password-container">
+						<input type="password" autocomplete="off" class="form-control  hideShowPassword-hidden" placeholder=" " name="password" id="password" autocapitalize="none" autocomplete="off" required="required" spellcheck="true" aria-label="Password">
+            
+              <span class="floating-label">Password</span>
+              
+					</div>
+                    
+                      <button type="button" for="show-password-input icon-eye-blocked" class="show-password fa fa-eye-slash" aria-label="Show password"  >
+                        <input id="show-password-input" type="checkbox" data-parsley-multiple="show-password-input" data-parsley-id="3953" checked aria-label="Toggle Password Visibility">
+                      </button>
+                    
+                  </div>
+                  
+                <div class="form-group code-container" style="display:none;">
+                  <input type="Text" class="form-control " id="code" name="code" placeholder=" " value="lwsd" aria-label="Code">
+                  
+                    <span class="floating-label">Code (optional)</span>
+                    
+                </div>
+                <input type="hidden" id="userdn" name="userdn" />
+                <div id="clre_captcha" class="col-md-offset-2"></div>
+                <button type="button" id="signin" name="signin" class="btn btn-primary btn-block btnlogin" data-loading-text="Please wait" aria-label="Sign In">Sign In</button>
+              </form>
+              
+            
+            
+            
+              
+              
+              
+              
+                    <a title=" Sign in with QuickCard" class="btn btn-primary btn-block link-center qrcode" href="/quickcard?school_code=lwsd&amp;custom_url=lwsd" > <i class="default fa fa-qrcode" data-loading-text="Please wait"></i> Sign in with QuickCard</a>
+                  
+              
+              
+              
+              
+            
+              
+              </div>
+             <div  style="text-align: center;">
+                
+              </div>
+              
+                <div class="social-link " >
+                  
+               
+                
+                  </div>
+                
+            </div>
+          </div>
+        </div><!-- /.container -->
+        
+        <div class="lp-login-footer">
+            
+                  <div class="cl-footer-logo-container"><svg id="lp-cl-cloud-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 209.2 149.3">
+                    <style type="text/css">.st1{fill:currentColor;} .st0{fill:currentColor;}</style><defs></defs>
+                    <circle class="st1" cx="101.2" cy="88.3" r="57.3"/>
+                    <path class="st0" d="M60.9,88.3c-8.2,9.3-0.1,13.7-0.1,13.7c0.3,0.2,0.6,0.3,0.9,0.4C60.5,97.4,60.4,92.7,60.9,88.3z"/>
+                    <path class="st0" d="M114,100.3c-6.4,4.3-13.8,18.8-13.8,18.8h-3.9c2.5-5.5,4.1-10.1,5.1-13.8c-1,0.3-1.5,0.5-1.5,0.5c-7.7,2.6-15.5,4-22.4,4.1
+                    c7.3,10.8,20.5,12.8,20.5,12.8c18.6,2.5,32.8-7.7,40.4-15.1C122.7,98.9,114,100.3,114,100.3L114,100.3z"/>
+                    <path class="st0" d="M174.3,60.2c0,0,12.3-30.5-15.8-51.4c0,0-45-29.6-70.1,19.8c0,0-18-18-40.2-4c-19,11.9-15.8,28-14.1,36.1
+                    c0,0-35.8,10.5-34,48.7c1.4,28.4,28.8,37,39.5,39.2c2.3,0.5,4.7,0.7,7.1,0.7h117.6c2.3,0,4.6-0.2,6.9-0.7
+                    c10.8-2.2,38.5-10.7,38-40.9C208.5,70.4,174.3,60.2,174.3,60.2L174.3,60.2z M97.1,128.7c-23.8-0.3-32.3-18.1-32.3-18.1
+                    c-0.5-1-0.9-1.9-1.3-2.8c-6.5-2.4-10.4-7-9.5-13.9s8.7-13.7,8.7-13.7c4.5-14,14.7-23.6,14.7-23.6s8.5-9.1,17.9-13.8l16.2,2.5
+                    c-36.7,15-38.6,45.9-38.6,45.9c-0.2,4.7,0.3,8.6,1.4,12c2.7-0.2,4.7-0.5,4.7-0.5c9.1-1.4,16.9-3.8,23.5-6.7c-0.2-6.1-3-7.6-3-7.6
+                    s-3.3-3.8-17-6l1.3-1.8c0,0,6.8,1.5,14.4,0c8.3-1.6,16-7.3,24.5-19l4.1-0.2c-8.3,11-8.9,19.4-7.5,24.9c8.3-6.2,12.2-11.6,12.2-11.6
+                    c15-20.9-5.8-17.7-5.8-17.7l6.2-7.4c31.8,6.9,2.6,35.6,2.6,35.6c-3.4,3.5-7.1,6.5-10.9,9c0.5,0.6,6,6.2,16.6,11.3
+                    c2.8-3,4.2-5.1,4.2-5.1l4.2,0.8C124,130.9,97.1,128.7,97.1,128.7L97.1,128.7z M108.4,69.1c-0.1,3.5-3,6.3-6.5,6.4
+                    c-3.9,0.1-7-3.1-6.8-7c0.1-3.5,3-6.3,6.5-6.4C105.4,62,108.6,65.2,108.4,69.1z"/>
+                    </svg><a href="http://www.classlink.com/" class="cl-footer-text" rel="noopener noreferrer">ClassLink</a>
+                  </div>
+             
+               
+              <div class="footer-link-container"><a href="https://docs.classlink.com" target="_blank" class="lp-login-footer-link footer-link" rel="noopener noreferrer">Help<span class="fa fa-external-link footer-link-icon"></span></a>
+                
+            <div class="lp-login-footer-bullet footer-bullet"><span class="dot"></span></div><a href="http://www.classlink.com/cdncheck" target="_blank" class="lp-login-footer-link footer-link" rel="noopener noreferrer">Browser Check<span class="fa fa-external-link footer-link-icon"></span></a>
+              
+              
+                
+                    <div class="lp-login-footer-bullet footer-bullet"><span class="dot"></span></div><a href="https://www.classlink.com/privacy" target="_blank" class="lp-login-footer-link footer-link last" rel="noopener noreferrer">Privacy<span class="fa fa-external-link footer-link-icon"></span></a>
+                
+              </div>
+                <div class="footer-applink-container">
+            
+              
+              
+            
+          </div>
+        </div>
+        
+        
+           
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="//cdn.classlink.com/production/launchpad/resources/require/require.js?t=1747227356386"></script>
+
+<script type="text/javascript" src="//cdn.classlink.com/production/launchpad/optimize/main.js?t=1747227356386"></script>
+<script type="text/javascript" src="//cdn.classlink.com/production/launchpad/optimize/otrack.js?t=1747227356386"></script>
+
+  <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+  <script src="//cdn.classlink.com/production/launchpad/js/login_main.js?t=1747227356386"></script>
+
+  <script type="text/javascript">
+    window.onpageshow = function(event) {
+        if (event.persisted) {
+            window.location.reload(); 
         }
-      }
-
-      animate();
-    }
-
-    setInterval(createRipple, 1000); // Create a ripple every second
-
-    class Particle {
-      constructor(x, y, directionX, directionY, size, color) {
-        this.x = x;
-        this.y = y;
-        this.directionX = directionX;
-        this.directionY = directionY;
-        this.size = size;
-        this.color = color;
-      }
-
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-      }
-
-      update() {
-        this.x += this.directionX;
-        this.y += this.directionY;
-
-        if (this.x > canvas.width || this.x < 0) {
-          this.directionX = -this.directionX;
-        }
-        if (this.y > canvas.height || this.y < 0) {
-          this.directionY = -this.directionY;
-        }
-
-        this.draw();
-      }
-    }
-
-    function initParticles() {
-      particlesArray.length = 0;
-      for (let i = 0; i < numberOfParticles; i++) {
-        const size = Math.random() * 5 + 1;
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        const directionX = (Math.random() * 0.4) - 0.2;
-        const directionY = (Math.random() * 0.4) - 0.2;
-        const color = 'red';
-        particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
-      }
-    }
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particlesArray.forEach(particle => particle.update());
-      requestAnimationFrame(animateParticles);
-    }
-
-    initParticles();
-    animateParticles();
+    };
   </script>
+
+  
 </body>
 </html>
