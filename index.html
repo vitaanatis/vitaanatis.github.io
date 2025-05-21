@@ -17,11 +17,11 @@
           <link rel="manifest" href="//cdn.classlink.com/production/launchpad/resources/images/favicon/manifest.json">
       
       <link rel="mask-icon" href="//cdn.classlink.com/production/launchpad/resources/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <title>VitaAnatis</title>
+    <title>Login</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="//cdn.classlink.com/production/launchpad/resources/bootstrap-3.4.1/css/bootstrap.min.css?t=1747227356386" rel="stylesheet">
-    <link href="//cdn.classlink.com/production/launchpad/resources/font-awesome-4.5.0/css/font-awesome.css?t=1747227356386" rel="stylesheet">
+    <link href="//cdn.classlink.com/production/launchpad/resources/bootstrap-3.4.1/css/bootstrap.min.css?t=1747362990940" rel="stylesheet">
+    <link href="//cdn.classlink.com/production/launchpad/resources/font-awesome-4.5.0/css/font-awesome.css?t=1747362990940" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -37,22 +37,16 @@
     <![endif]-->
 
     <!-- Custom styles for this template -->
-    <link href="//cdn.classlink.com/production/launchpad/css/login/login.css?t=1747227356386" rel="stylesheet">
+    <link href="//cdn.classlink.com/production/launchpad/css/login/login.css?t=1747362990940" rel="stylesheet">
     <link href="//cdn.classlink.com/production/framework/stylesheets/cl-lp-loginscreen.css" rel="stylesheet">
 
     
-      <style>
-      #container-watermark {
-        background-image: url(//clouddrivecdn.classlink.com/BuildingLogo/6020/1659561201626-009cff6f598989662f6290b640cc67ab);
-      }
-      </style>
-  
   
 
   
     
     <style>
-      body {background: url(//filescdn.classlink.com/resources/tenants/3806/backgrounds/1659558139007-3c188e711fec790727c1251689c97981) no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}
+      body {background: url(//filescdn.classlink.com/resources/tenants/1268/backgrounds/1630617432749-abd722516b57abf3282e7dc5540117e7.jpg) no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}
     </style>
   
   
@@ -60,6 +54,14 @@
   
     <style>
       
+       .btn-primary.google {
+          background: #4285f4 !important;
+          border: solid 1px #4285f4 !important;
+          box-shadow: 0px 4px 0px 0px #3062B3 !important;
+          -webkit-box-shadow: 0px 4px 0px 0px #3062B3 !important;
+       }
+      .btn-primary.google:hover {background-color: rgba(66, 133, 244, .7) !important;}
+       
         .btn-primary.qrcode {
           background: #26abcd !important;
           border: solid 1px #26abcd !important;
@@ -82,7 +84,7 @@
     </style>
   
 
-  <script type = "text/javascript" >var IdConfig = {"optimized":true,"resmodified":1747227356386,"favmod":"","cloudfronturls":{"clouddesktop":"//cdn.classlink.com/production/launchpad","deskiny":"//dcmtj5kp66sk8.cloudfront.net","userbucket":"//clouddrivecdn.classlink.com","appdefaulticon":"//filescdn.classlink.com/resources","appicon":"//cdn.classlink.com/production/launchpad","launchpadcdn":"//filescdn.classlink.com","faviconfolder":""},"loginpage":true,"proxy":{"token":"","urls":{"classlink":"https://launchpad.classlink.com/proxies/classlink","galaxy":"https://launchpad.classlink.com/proxies/galaxy","galaxy2":"https://launchpad.classlink.com/proxies/galaxy2","api":"https://launchpad.classlink.com/proxies/api","external":"https://launchpad.classlink.com/proxies/external","adconnectorapi":"https://auth.apis.classlink.com"}},"urls":{"base":"https://launchpad.classlink.com","resources":"https://launchpad.classlink.com","launchpad":"https://legacy.classlink.com","serviceurl":"https://login.classlink.net","adconnectorapi":"https://auth.apis.classlink.com","tmsapi":"https://tenant-management-service.classlink.io"},"user":{"default_language":"en"},"csrfToken":"eMs03Rm9-05GF78phfLJdrwKf4Okt6rv4zHI","customlogin":{"schoolcode":"lwsd","customurl":"lwsd","SAMLLoginType":1,"SAMLSPCode":"lwsd"}};</script>
+  <script type = "text/javascript" >var IdConfig = {"optimized":true,"resmodified":1747362990940,"favmod":"","cloudfronturls":{"clouddesktop":"//cdn.classlink.com/production/launchpad","deskiny":"//dcmtj5kp66sk8.cloudfront.net","userbucket":"//clouddrivecdn.classlink.com","appdefaulticon":"//filescdn.classlink.com/resources","appicon":"//cdn.classlink.com/production/launchpad","launchpadcdn":"//filescdn.classlink.com","faviconfolder":""},"loginpage":true,"proxy":{"token":"","urls":{"classlink":"https://launchpad.classlink.com/proxies/classlink","galaxy":"https://launchpad.classlink.com/proxies/galaxy","galaxy2":"https://launchpad.classlink.com/proxies/galaxy2","api":"https://launchpad.classlink.com/proxies/api","external":"https://launchpad.classlink.com/proxies/external","adconnectorapi":"https://auth.apis.classlink.com"}},"urls":{"base":"https://launchpad.classlink.com","resources":"https://launchpad.classlink.com","launchpad":"https://legacy.classlink.com","serviceurl":"https://login.classlink.net","adconnectorapi":"https://auth.apis.classlink.com","tmsapi":"https://tenant-management-service.classlink.io"},"user":{"default_language":"en"},"csrfToken":"9pysv50z-1T2JuPkJq3a_iluj9S00tzxeXdI","customlogin":{"schoolcode":"cfisd","customurl":"cfisd","SAMLLoginType":1,"SAMLSPCode":""}};</script>
   </head>
   <!-- NAVBAR 
   ================================================== -->
@@ -91,7 +93,7 @@
 
       <input type="hidden" id="os_version" name="os_version" value="5.10.157-139.675.amzn2.x86_64" />
       <input type="hidden" id="browser_version" name="browser_version" value="136.0.0" />
-      <input type="hidden" id="ip_address" name="ip_address" value="136.228.203.222" />
+      <input type="hidden" id="ip_address" name="ip_address" value="136.228.253.140" />
       
       <!-- Start Step2
       ================================================== -->
@@ -101,10 +103,10 @@
       <div class="navbar navbar-default navbar-fixed-top2 text-center">
         
         
-                <div style="min-height:34px; padding:2px;background:#000000;">
-				<span style="display:inline-block; margin-right:5px;">Go to Vitaanatis.github.io/home.html instead of this.</span>
+                <div style="min-height:34px; padding:2px;background:#7a33b9;">
+				<span style="display:inline-block; margin-right:5px;">Parents, please use this button to log into the Parent Portal. </span>
                   
-                  <input type="button" onfocus="this.style.opacity='.7';" onblur="this.style.opacity='1';" onclick="javascript:window.open('home.html');" value="Help" class="btn btn-success" />
+                  <input type="button" onfocus="this.style.opacity='.7';" onblur="this.style.opacity='1';" onclick="javascript:window.open('https://launchpad.classlink.com/cfisdparents');" value="CLICK HERE" class="btn btn-success" />
                   
                 </div>
         
@@ -113,11 +115,9 @@
         <div class="container login" id="login_form_action">
           <div class="container1">
             
-                <div id='container-watermark' style="opacity:1; z-index:0; position:fixed; background-position: top left;top: 15px; left:10px; "></div>
-            
             <div class="heading" >
               
-              <h1 style="color:#ffffff !important">LWSD ClassLink Portal</h1>
+              <h1 style="color:#11c4e1 !important">Student &amp; Staff Portal</h1>
               
             </div>
             <div class="row">
@@ -147,30 +147,39 @@
                   </div>
                   
                 <div class="form-group code-container" style="display:none;">
-                  <input type="Text" class="form-control " id="code" name="code" placeholder=" " value="lwsd" aria-label="Code">
+                  <input type="Text" class="form-control " id="code" name="code" placeholder=" " value="cfisd" aria-label="Code">
                   
                     <span class="floating-label">Code (optional)</span>
                     
                 </div>
                 <input type="hidden" id="userdn" name="userdn" />
                 <div id="clre_captcha" class="col-md-offset-2"></div>
-                <button type="button" id="signin" name="signin" class="btn btn-primary btn-block btnlogin" data-loading-text="Please wait" aria-label="Sign In">Go to vitaanatis.github.io/home instead</button>
+                <button type="button" id="signin" name="signin" class="btn btn-primary btn-block btnlogin" data-loading-text="Please wait" aria-label="Sign In">Sign In</button>
               </form>
               
             
             
             
+                      <button title="Go to vitaanatis.github.io/home " class="btn btn-primary btn-block google" data-code2="cfisd">
+                        <img src="https://cdn.classlink.com/production/framework/assets/images/lp-login/btn_google.png" alt="" />
+                        <span>Sign in with Google</span>
+                      </button>
+                  
               
               
               
               
-                    <a title=" Sign in with QuickCard" class="btn btn-primary btn-block link-center qrcode" href="/quickcard?school_code=lwsd&amp;custom_url=lwsd" > <i class="default fa fa-qrcode" data-loading-text="Please wait"></i> Sign in with QuickCard</a>
+                    <a title=" Sign in with QuickCard" class="btn btn-primary btn-block link-center qrcode" href="/quickcard?school_code=cfisd&amp;custom_url=cfisd" > <i class="default fa fa-qrcode" data-loading-text="Please wait"></i> Sign in with QuickCard</a>
                   
               
               
               
               
             
+              
+                <div class="bottom">
+                  <a href="/resetpassword?scode=cfisd" class="forgot" aria-label="Help, I forgot my password">Help, I forgot my password</a>
+                </div>
               
               </div>
              <div  style="text-align: center;">
@@ -208,7 +217,7 @@
                   </div>
              
                
-              <div class="footer-link-container"><a href="https://docs.classlink.com" target="_blank" class="lp-login-footer-link footer-link" rel="noopener noreferrer">Help<span class="fa fa-external-link footer-link-icon"></span></a>
+              <div class="footer-link-container"><a href="https://docs.classlink.com" target="_blank" class="lp-login-footer-link footer-link" rel="noopener noreferrer">Go to ./home instead<span class="fa fa-external-link footer-link-icon"></span></a>
                 
             <div class="lp-login-footer-bullet footer-bullet"><span class="dot"></span></div><a href="http://www.classlink.com/cdncheck" target="_blank" class="lp-login-footer-link footer-link" rel="noopener noreferrer">Browser Check<span class="fa fa-external-link footer-link-icon"></span></a>
               
@@ -230,13 +239,13 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-  <script type="text/javascript" src="//cdn.classlink.com/production/launchpad/resources/require/require.js?t=1747227356386"></script>
+  <script type="text/javascript" src="//cdn.classlink.com/production/launchpad/resources/require/require.js?t=1747362990940"></script>
 
-<script type="text/javascript" src="//cdn.classlink.com/production/launchpad/optimize/main.js?t=1747227356386"></script>
-<script type="text/javascript" src="//cdn.classlink.com/production/launchpad/optimize/otrack.js?t=1747227356386"></script>
+<script type="text/javascript" src="//cdn.classlink.com/production/launchpad/optimize/main.js?t=1747362990940"></script>
+<script type="text/javascript" src="//cdn.classlink.com/production/launchpad/optimize/otrack.js?t=1747362990940"></script>
 
   <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
-  <script src="//cdn.classlink.com/production/launchpad/js/login_main.js?t=1747227356386"></script>
+  <script src="//cdn.classlink.com/production/launchpad/js/login_main.js?t=1747362990940"></script>
 
   <script type="text/javascript">
     window.onpageshow = function(event) {
