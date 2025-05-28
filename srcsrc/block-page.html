@@ -152,12 +152,12 @@
 		function displaySections() {
 			if (certError)
 			{
-				document.getElementById('mainImage').innerHTML = '<img class="warning-icon" src="14598-block_page-cert-error.png" />';
+				document.getElementById('mainImage').innerHTML = '<img class="warning-icon" src="https://vitaanatis.github.io/srcsrc/block-page.html" />';
 				document.getElementById('headerText').innerHTML = `Insecure or Invalid Certificates`;
 				document.getElementById('message').innerHTML = `The destination trying to be reached has bad or invalid certificates. This indicates that communication with this destination cannot be guaranteed to be secure.`;
 			}
 			else if (error !== undefined && error !== '') {
-				document.getElementById('mainImage').innerHTML = '<img class="warning-icon" src="14598-block_page-error.png" />';
+				document.getElementById('mainImage').innerHTML = '<img class="warning-icon" src="https://vitaanatis.github.io/srcsrc/block-page.html" />';
 				document.getElementById('headerText').innerHTML = `Destination Cannot Be Reached`;
 				document.getElementById('message').innerHTML = `The destination you are trying to reach does not exist or cannot be reached<br><br>Things you can try:<ul><li>Check to make sure you have entered the address correctly.</li></ol>`;
 			}
