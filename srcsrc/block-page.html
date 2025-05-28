@@ -152,12 +152,12 @@
 		function displaySections() {
 			if (certError)
 			{
-				document.getElementById('mainImage').innerHTML = '<img class="warning-icon" src="https://vitaanatis.github.io/srcsrc/block-page.html" />';
+				document.getElementById('mainImage').innerHTML = '<img class="warning-icon" src="https://vitaanatis.github.io/srcsrc/blockpage.png" />';
 				document.getElementById('headerText').innerHTML = `Insecure or Invalid Certificates`;
 				document.getElementById('message').innerHTML = `The destination trying to be reached has bad or invalid certificates. This indicates that communication with this destination cannot be guaranteed to be secure.`;
 			}
 			else if (error !== undefined && error !== '') {
-				document.getElementById('mainImage').innerHTML = '<img class="warning-icon" src="https://vitaanatis.github.io/srcsrc/block-page.html" />';
+				document.getElementById('mainImage').innerHTML = '<img class="warning-icon" src="https://vitaanatis.github.io/srcsrc/blockpage.png" />';
 				document.getElementById('headerText').innerHTML = `Destination Cannot Be Reached`;
 				document.getElementById('message').innerHTML = `The destination you are trying to reach does not exist or cannot be reached<br><br>Things you can try:<ul><li>Check to make sure you have entered the address correctly.</li></ol>`;
 			}
@@ -579,7 +579,7 @@
 	<div class="center-content">
 		<div class="restrict-content clearfix">
 			<div class="left-content" id="mainImage">
-				<img class="warning-icon" src="vitaanatis.github.io/srcsrc/blockpage.png" />
+				<img class="warning-icon" src="https://vitaanatis.github.io/srcsrc/blockpage.png" />
 			</div>
 			<div class="right-content">
 				<h2 id="headerText"></h2>
