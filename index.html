@@ -1,15 +1,16 @@
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8141368681793084"
-     crossorigin="anonymous"></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vita Anatis</title>
+  <link rel="icon" type="image/png" href="https://vitaanatis.github.io/assets2/a683favicon.png">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8141368681793084"
+     crossorigin="anonymous"></script>
   <style>
     body {
       margin: 0;
-      background: linear-gradient(to bottom, blue, yellow); /* Gradient transition */
+      background: linear-gradient(to bottom, blue, yellow);
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -25,10 +26,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column; /* Stack clock and text vertically */
+      flex-direction: column;
     }
     .random-text {
-      font-size: 24px; /* Half the size of the time element */
+      font-size: 24px;
       margin-top: 10px;
     }
     canvas {
@@ -145,7 +146,7 @@
       animate();
     }
 
-    setInterval(createRipple, 1000); // Create a ripple every second
+    setInterval(createRipple, 1000);
 
     class Particle {
       constructor(x, y, directionX, directionY, size, color) {
