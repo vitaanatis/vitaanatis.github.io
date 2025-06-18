@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Embedder</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            text-align: center;
+        }
+
+        .message-box {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-box">
+        <h1>Opening Content...</h1>
+        <p>Your content is being loaded in a new `about:blank` tab.</p>
+        <p>If nothing appears, please check your browser's pop-up blocker settings and try again.</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const targetUrl = "https://vitaanatis.github.io/aboutblank";
+            const targetTitle = "VitaAnatis Embed"; // Optional: Set a title for the new tab
+            const targetFavicon = "https://vitaanatis.github.io/assets2/a683favicon.png"; // Optional: Set a favicon for the new tab
+
+            try {
+                const newWindow = window.open('about:blank');
+
+                if (newWindow) {
+                    // Create the iframe
+                    const iframe = newWindow.document.createElement('iframe');
+                    iframe.src = targetUrl;
+                    iframe.style.width = "100%";
+                    iframe.style.height = "100vh"; // Use vh for full viewport height
+                    iframe.style.border = "none";
+                    iframe.style.margin = "0";
+                    iframe.style.padding = "0";
+
+                    // Ensure the new window's body has no default margins
+                    newWindow.document.body.style.margin = "0";
+                    newWindow.document.body.style.overflow = "hidden"; // Hide scrollbars
+
+                    // Append the iframe to the new window's body
+                    newWindow.document.body.appendChild(iframe);
+
+                    // Set the custom title for the new window
+                    newWindow.document.title = targetTitle;
+
+                    // Set the custom favicon for the new window
+                    if (targetFavicon) {
+                        const link = newWindow.document.createElement('link');
+                        link.rel = 'icon';
+                        link.href = targetFavicon;
+                        newWindow.document.head.appendChild(link);
+                    }
+                } else {
+                    // Alert if pop-up was blocked
+                    // Using a simple alert here as it's a small utility script
+                    // For a full app, you'd show a modal or inline message.
+                    alert("Pop-up blocked! Please allow pop-ups for this site to open the embedded content.");
+                }
+            } catch (error) {
+                console.error("Error opening about:blank embed:", error);
+                alert("An error occurred while trying to open the content. Please check the console for details.");
+            }
+        });
+    </script>
+</body>
+</html>
