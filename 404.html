@@ -1,15 +1,219 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>404: Page not found.</title>
-  </head>
-  <body>
-    <h1>404: Page not found</h1>
-    <p>A683 Website: VitaAnatis</p>p>
-    <p>Page not found.</p>
-    <a href="/">Go to Homepage</a>
-    <p>If you were trying about:blank embedder, try not having a "/" after the "aboutblank"</p>
-    <p>If you were using Gaming Escape, put a "gaming-escape/" before the "iframe?ur=" thing.</p>
-    <p>Visit sites.google.com/view/v-hubts!</p>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Error - Page Not Found</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-glow: #00eaff; /* Bright cyan/aqua for glow */
+            --secondary-glow: #ff57f5; /* Bright magenta */
+            --button-start: #00d4ff;
+            --button-end: #007bff;
+            --background-dark: #1a1a2e;
+            --background-medium: #16213e;
+            --background-light: #0f3460;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-medium) 50%, var(--background-dark) 100%);
+            color: #e0e0e0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh; /* Ensure body takes full height */
+            position: relative;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Background grid/particles for extra "shiny" effect */
+        body::before {
+            content: '';
+            position: fixed; /* Use fixed to keep background in place during scroll */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at center, rgba(var(--primary-glow), 0.1) 0%, transparent 70%),
+                linear-gradient(rgba(var(--primary-glow), 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(var(--primary-glow), 0.05) 1px, transparent 1px);
+            background-size: 50px 50px; /* Adjust grid size */
+            opacity: 0.3;
+            z-index: -1;
+            animation: backgroundPan 60s linear infinite;
+        }
+
+        @keyframes backgroundPan {
+            from { background-position: 0 0; }
+            to { background-position: 5000px 5000px; } /* Pan larger than viewport to create continuous motion */
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05); /* Semi-transparent white for glass effect */
+            backdrop-filter: blur(10px); /* Glassmorphism blur */
+            -webkit-backdrop-filter: blur(10px); /* Safari support */
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 0 40px rgba(0, 234, 255, 0.3), /* Primary glow shadow */
+                        0 0 15px rgba(255, 87, 245, 0.2); /* Secondary glow shadow */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 1s ease-out;
+            max-width: 90%;
+            width: 700px;
+            margin: 50px auto; /* Allows content to be centered and scroll */
+            position: relative;
+            z-index: 1; /* Ensure content is above background effects */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5em;
+            margin-bottom: 0;
+            color: #fff;
+            text-shadow:
+                0 0 10px var(--primary-glow),
+                0 0 20px var(--primary-glow),
+                0 0 30px var(--primary-glow),
+                0 0 40px var(--primary-glow); /* Intense glow */
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow); }
+            to { text-shadow: 0 0 20px var(--primary-glow), 0 0 30px var(--primary-glow), 0 0 40px var(--primary-glow); }
+        }
+
+        h2 {
+            font-size: 2.2em;
+            color: #aaa;
+            margin-top: 10px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            color: #c0c0c0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 30px auto; /* Center list */
+            max-width: 600px; /* Constrain list width for better readability */
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        li {
+            margin-bottom: 12px;
+            color: #ddd;
+            position: relative;
+            padding-left: 25px;
+            text-align: left;
+        }
+
+        li::before {
+            content: '•'; /* Bullet point */
+            color: var(--secondary-glow);
+            font-size: 1.5em;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        a {
+            color: var(--primary-glow);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        a:hover {
+            color: #fff;
+            text-shadow: 0 0 8px var(--primary-glow);
+        }
+
+        .button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--button-start), var(--button-end));
+            color: white;
+            padding: 18px 35px;
+            border-radius: 30px; /* Pill shape */
+            margin-top: 40px;
+            font-size: 1.3em;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5),
+                        0 0 15px var(--primary-glow);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent); /* Swipe shine effect */
+            transition: left 0.5s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6),
+                        0 0 25px var(--primary-glow);
+            background: linear-gradient(45deg, var(--button-end), var(--button-start));
+        }
+
+        .button:hover::before {
+            left: 100%;
+        }
+
+        .footer-note {
+            margin-top: 50px;
+            font-size: 0.9em;
+            color: #999;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <h2>Access Denied: Page Not Found</h2>
+        <p>It seems the data stream you requested has terminated unexpectedly. We couldn't locate the file on the **VitaAnatis** server.</p>
+        <p>This could be due to a corrupted link, a mistyped address, or the content may have been moved to a new sector.</p>
+
+        <a href="/" class="button">Return to Mainframe (Homepage)</a>
+
+        <p><strong>System Diagnostics & Troubleshooting:</strong></p>
+        <ul>
+            <li>If you were attempting an `about:blank` embedder protocol, ensure there is **no "/"** at the end of "aboutblank".</li>
+            <li>For Gaming Escape module integration, prepend **"gaming-escape/"** to your "iframe?ur=" string.</li>
+            <li>You can also recalibrate your navigation by visiting our central hub: <a href="https://sites.google.com/view/v-hubts" target="_blank" rel="noopener noreferrer">sites.google.com/view/v-hubts</a>.</li>
+        </ul>
+
+        <div class="footer-note">
+            <p>If this error persists, please verify your input or report this anomaly to system administrators.</p>
+        </div>
+    </div>
+</body>
 </html>
