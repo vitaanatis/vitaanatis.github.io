@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vita Anatis</title>
     <link rel="icon" type="image/png" href="https://vitaanatis.github.io/assets2/a683favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&family=Digital+Numbers&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8141368681793084" crossorigin="anonymous"></script>
     <style>
         @font-face {
@@ -30,6 +30,13 @@
             --banner-bg: rgba(0, 0, 0, 0.8);
             --glass-bg: rgba(255, 255, 255, 0.08);
             --glass-border: rgba(255, 255, 255, 0.1);
+            /* New Discord colors */
+            --discord-purple: #7289DA;
+            --discord-dark-purple: #6A7EBA;
+            /* New Chat colors (using purple/gold theme variations) */
+            --chat-bg-color: #A020F0; /* Brighter purple */
+            --chat-hover-color: #8A2BE2; /* Slightly darker purple on hover */
+            --chat-shadow-color: #FFD700; /* Gold for chat glow */
         }
 
         body {
@@ -41,7 +48,7 @@
             min-height: 100vh;
             font-family: 'Roboto', sans-serif;
             color: var(--text-color-primary);
-            position: relative;
+            position: relative; /* Ensure body is relative for absolute positioning of icons */
         }
 
         canvas {
@@ -100,7 +107,6 @@
 
         #main-heading {
             font-size: clamp(2.5em, 7vw, 4.5em);
-            /* margin-bottom: 15px; Removed if no text below */
             text-shadow: 0 0 20px var(--accent-color-light), 0 0 30px var(--accent-color-dark);
             animation: pulseGlow 2s infinite alternate;
         }
@@ -109,8 +115,6 @@
             from { text-shadow: 0 0 15px var(--accent-color-light), 0 0 25px var(--accent-color-dark); }
             to { text-shadow: 0 0 25px var(--accent-color-light), 0 0 40px var(--accent-color-dark); }
         }
-
-        /* #typewriter-text is now removed from HTML, so its CSS is not needed */
 
         .banner {
             width: 100%;
@@ -163,6 +167,75 @@
             left: 100%;
         }
 
+        /* Discord Icon Styling */
+        .discord-link {
+            position: absolute; /* Position relative to the body */
+            top: 20px; /* Distance from top */
+            right: 20px; /* Distance from right */
+            z-index: 102; /* Ensure it's above other content */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px; /* Size of the clickable area */
+            height: 60px;
+            background-color: var(--discord-purple); /* Base Discord purple */
+            border-radius: 50%; /* Make it circular */
+            box-shadow: 0 0 15px var(--discord-purple), 0 0 30px var(--accent-color-light); /* Purple and light accent glow */
+            transition: all 0.3s ease;
+        }
+
+        .discord-link:hover {
+            transform: scale(1.1) rotate(5deg); /* Slightly larger and rotated on hover */
+            background-color: var(--discord-dark-purple); /* Darker purple on hover */
+            box-shadow: 0 0 25px var(--discord-dark-purple), 0 0 40px var(--accent-color-light); /* Stronger glow on hover */
+        }
+
+        .discord-link svg {
+            width: 35px; /* Size of the SVG icon */
+            height: 35px;
+            fill: white; /* White icon fill */
+            transition: fill 0.3s ease;
+        }
+
+        .discord-link:hover svg {
+            fill: #E0E0E0; /* Slightly off-white on hover */
+        }
+
+        /* Chat Link Styling */
+        .chat-link {
+            position: absolute;
+            top: 20px; /* Same top as Discord */
+            right: 90px; /* Position to the left of Discord icon (60px width + 10px spacing + 20px right margin) */
+            z-index: 102;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: var(--chat-bg-color); /* Chat purple */
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--chat-bg-color), 0 0 30px var(--chat-shadow-color); /* Purple and gold glow */
+            transition: all 0.3s ease;
+        }
+
+        .chat-link:hover {
+            transform: scale(1.1) rotate(-5deg); /* Slightly larger and rotated on hover, opposite direction */
+            background-color: var(--chat-hover-color); /* Darker purple on hover */
+            box-shadow: 0 0 25px var(--chat-hover-color), 0 0 40px var(--chat-shadow-color); /* Stronger glow on hover */
+        }
+
+        .chat-link svg {
+            width: 35px;
+            height: 35px;
+            fill: white;
+            transition: fill 0.3s ease;
+        }
+
+        .chat-link:hover svg {
+            fill: #FFD700; /* Gold fill on hover for chat icon */
+        }
+
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .header {
@@ -183,6 +256,26 @@
                 padding: 10px 15px;
                 font-size: 0.9em;
             }
+            .discord-link {
+                width: 45px; /* Smaller icon on mobile */
+                height: 45px;
+                top: 10px;
+                right: 10px;
+            }
+            .discord-link svg {
+                width: 25px;
+                height: 25px;
+            }
+            .chat-link {
+                width: 45px; /* Smaller icon on mobile */
+                height: 45px;
+                top: 10px;
+                right: 65px; /* Adjust right position for mobile */
+            }
+            .chat-link svg {
+                width: 25px;
+                height: 25px;
+            }
         }
         @media (max-width: 480px) {
             .banner button {
@@ -192,6 +285,21 @@
     </style>
 </head>
 <body>
+    <!-- Discord Invite Link in Top Right Corner -->
+    <a href="https://discord.gg/ysxZmhKp" target="_blank" class="discord-link" aria-label="Join our Discord server">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 245 240">
+            <path d="M104.4 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1.1-6.1-4.5-11.1-10.2-11.1zM140.9 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1s-4.5-11.1-10.2-11.1z"/>
+            <path d="M189.5 20h-134C44.2 20 35 29.2 35 40.6v135.2c0 11.4 9.2 20.6 20.5 20.6h113.4l-5.3 18.2c-1.3 4.4 1.4 9.1 5.8 10.4 4.4 1.3 9.1-1.4 10.4-5.8l5.4-18.7c-4.7-.7-9.4-1.9-14-3.8l-1.4-1.1-3.2-2.5c-2-.3-4-.4-6-.4h-1.6c-4.2 0-8.2-.7-12-2.1-4.5 4.3-9.4 7.6-14.7 9.8 13.9 4.3 28.2 6.7 42.7 6.7s28.9-2.4 42.7-6.7c-5.3-2.2-10.2-5.5-14.7-9.8-3.8 1.4-7.9 2.1-12.1 2.1-2.1 0-4-.1-6.1-.4l-3.2 2.5-1.4 1.1c-4.6 1.9-9.3 3.1-14 3.8l5.4 18.7c1.3 4.4 6 7.1 10.4 5.8 4.4-1.3 7.1-6 5.8-10.4l-5.3-18.2h11.7c11.4 0 20.6-9.2 20.6-20.6V40.6C210.1 29.2 200.9 20 189.5 20zM92.7 151.7c-4.7 0-8.4-4.2-8.4-9.3 0-5.1 3.8-9.3 8.4-9.3 4.7 0 8.4 4.2 8.4 9.3 0 5.1-3.7 9.3-8.4 9.3zm59.6 0c-4.7 0-8.4-4.2-8.4-9.3 0-5.1 3.8-9.3 8.4-9.3 4.7 0 8.4 4.2 8.4 9.3 0 5.1-3.7 9.3-8.4 9.3z"/>
+        </svg>
+    </a>
+
+    <!-- Chat Invite Link in Top Right Corner -->
+    <a href="https://blipchatv2.onrender.com" target="_blank" class="chat-link" aria-label="Join our Chat server">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+        </svg>
+    </a>
+
     <div class="header">
         <div id="top-left-clock"></div>
         <div id="battery-status">
@@ -203,13 +311,13 @@
     <div class="clock-container-wrapper">
         <div class="clock-container">
             <div id="main-heading">VitaAnatis</div>
-            </div>
+        </div>
     </div>
 
     <div class="banner">
         <button onclick="window.open('https://vitaanatis.github.io/aboutblank', '_blank')">About:Blank</button>
-        <button onclick="window.open('https://vitaanatis.github.io/gaming-escape', '_blank')">Gaming Escape</button>
-        <button onclick="window.open('https://vitaanatis.github.io/uc', '_blank')">Unblocked Cave</button>
+        <button onclick="window.open('https://vitaanatis.github.io/gaming-escape/games', '_blank')">Gaming Escape</button>
+        <button onclick="window.open('https://vitaanatis.github.io/uc/games/games.html', '_blank')">Unblocked Cave</button>
         <button onclick="window.open('https://vitaanatis.github.io/3kh0', '_blank')">3kh0</button>
         <button onclick="window.open('https://vitaanatis.github.io/tgh', '_blank')">Gamehub</button>
         <button onclick="window.open('https://vitaanatis.github.io/incredible-website', '_blank')">Incredible Website</button>
@@ -285,8 +393,6 @@
         }
         setInterval(updateTopClockAndBattery, 1000);
         updateTopClockAndBattery(); // Initial call
-
-        // Removed typewriterEffect function and related variables
 
         // --- Ripple Effect Logic ---
         function createRipple() {
