@@ -74,6 +74,7 @@
         .reminder-card.red { border-left: 8px solid #ef4444; } /* Red */
         .reminder-card.blue { border-left: 8px solid #3b82f6; } /* Blue */
         .reminder-card.yellow { border-left: 8px solid #eab308; } /* Yellow */
+        .reminder-card.purple { border-left: 8px solid #36013f; } /*Purple newly added*/
 
         .reminder-card.completed {
             opacity: 0.7;
@@ -201,6 +202,7 @@
                         <option value="none">None</option>
                         <option value="red">Test or Quiz (Red)</option>
                         <option value="blue">Sports (Blue)</option>
+                        <option value="purple">Class or Practice</option>
                         <option value="yellow">Arrival of Something (Yellow)</option>
                     </select>
                 </div>
@@ -480,7 +482,9 @@
             currentModalReminderId = reminder.id; // Store ID of reminder currently in modal
             modalTitle.textContent = reminder.category === 'red' ? 'Test/Quiz Alert!' :
                                     reminder.category === 'blue' ? 'Sports Event!' :
+                                    reminder.category === 'purple' ? 'Go to class!' :
                                     reminder.category === 'yellow' ? 'Arrival Alert!' : 'Reminder!';
+                                    
             modalText.textContent = reminder.text;
             const reminderDateTime = new Date(reminder.timestamp);
             const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: true };
