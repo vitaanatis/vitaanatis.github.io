@@ -75,6 +75,7 @@
         .reminder-card.blue { border-left: 8px solid #3b82f6; } /* Blue */
         .reminder-card.yellow { border-left: 8px solid #eab308; } /* Yellow */
         .reminder-card.purple { border-left: 8px solid #36013f; } /*Purple newly added*/
+        .reminder-card.green { border-left: 8px solid #00FF00; } /*green*/
 
         .reminder-card.completed {
             opacity: 0.7;
@@ -203,6 +204,7 @@
                         <option value="red">Test or Quiz (Red)</option>
                         <option value="blue">Sports (Blue)</option>
                         <option value="purple">Class or Practice</option>
+                        <option value="green">Celebration or event</option>
                         <option value="yellow">Arrival of Something (Yellow)</option>
                     </select>
                 </div>
@@ -483,6 +485,7 @@
             modalTitle.textContent = reminder.category === 'red' ? 'Test/Quiz Alert!' :
                                     reminder.category === 'blue' ? 'Sports Event!' :
                                     reminder.category === 'purple' ? 'Go to class!' :
+                                    reminder.category === 'green' ? 'Celebration or event!' :
                                     reminder.category === 'yellow' ? 'Arrival Alert!' : 'Reminder!';
                                     
             modalText.textContent = reminder.text;
