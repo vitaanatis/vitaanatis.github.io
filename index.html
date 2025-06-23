@@ -100,7 +100,7 @@
             color: white;
             text-align: center;
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Changed to column to stack elements vertically */
             align-items: center;
             max-width: 90%;
         }
@@ -109,7 +109,16 @@
             font-size: clamp(2.5em, 7vw, 4.5em);
             text-shadow: 0 0 20px var(--accent-color-light), 0 0 30px var(--accent-color-dark);
             animation: pulseGlow 2s infinite alternate;
+            margin-bottom: 5px; /* Added margin to separate from the email */
         }
+
+        .email-address {
+            font-size: 0.8em; /* Smaller font size for the email */
+            color: var(--text-color-secondary); /* Using a secondary text color or a custom one */
+            margin-top: 0; /* Remove default top margin */
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); /* Subtle text shadow for glow */
+        }
+
 
         @keyframes pulseGlow {
             from { text-shadow: 0 0 15px var(--accent-color-light), 0 0 25px var(--accent-color-dark); }
@@ -245,6 +254,9 @@
             #main-heading {
                 font-size: clamp(2em, 8vw, 3.5em);
             }
+            .email-address {
+                font-size: 0.7em; /* Make email smaller on mobile */
+            }
             .clock-container {
                 padding: 25px 30px;
             }
@@ -285,7 +297,6 @@
     </style>
 </head>
 <body>
-    <!-- Discord Invite Link in Top Right Corner -->
     <a href="https://discord.gg/ysxZmhKp" target="_blank" class="discord-link" aria-label="Join our Discord server">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 245 240">
             <path d="M104.4 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1.1-6.1-4.5-11.1-10.2-11.1zM140.9 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1s-4.5-11.1-10.2-11.1z"/>
@@ -293,12 +304,12 @@
         </svg>
     </a>
 
-    <!-- Chat Invite Link in Top Right Corner -->
     <a href="https://blipchatv2.onrender.com" target="_blank" class="chat-link" aria-label="Join our Chat server">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
         </svg>
     </a>
+    
 
     <div class="header">
         <div id="top-left-clock"></div>
@@ -311,7 +322,7 @@
     <div class="clock-container-wrapper">
         <div class="clock-container">
             <div id="main-heading">VitaAnatis</div>
-        </div>
+            <p class="email-address">a683company@gmail.com</p> </div>
     </div>
 
     <div class="banner">
@@ -475,7 +486,7 @@
             for (let a = 0; a < particlesArray.length; a++) {
                 for (let b = a; b < particlesArray.length; b++) {
                     let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
-                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                                     ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
 
                     if (distance < maxConnectionDistance * maxConnectionDistance) {
                         opacityValue = 1 - (distance / (maxConnectionDistance * maxConnectionDistance));
