@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vita Anatis</title>
     <link rel="icon" type="image/png" href="https://vitaanatis.github.io/newlogo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght%40300;400;700&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8141368681793084" crossorigin="anonymous"></script>
     <style>
         @font-face {
             font-family: 'Digital Numbers';
             src: url('https://raw.githubusercontent.com/VitaAnatis/VitaAnatis.github.io/main/digital-7.ttf') format('truetype');
-            /* Fallback to common monospace if custom font fails */
             font-weight: normal;
             font-style: normal;
         }
@@ -20,7 +19,7 @@
             --bg-dark-blue: #800080;
             --bg-dark-purple: #1F1735;
             --text-color-primary: #e0e0e0;
-            --text-color-secondary: #c0c0c0; /* Still defined but less used */
+            --text-color-secondary: #c0c0c0;
             --accent-color-light: #00eaff;
             --accent-color-dark: #8f00ff;
             --button-bg-start: #8b0000;
@@ -30,32 +29,32 @@
             --banner-bg: rgba(0, 0, 0, 0.8);
             --glass-bg: rgba(255, 255, 255, 0.08);
             --glass-border: rgba(255, 255, 255, 0.1);
-            /* New Discord colors */
             --discord-purple: #7289DA;
             --discord-dark-purple: #6A7EBA;
-            /* New Chat colors (using purple/gold theme variations) */
-            --chat-bg-color: #A020F0; /* Brighter purple */
-            --chat-hover-color: #8A2BE2; /* Slightly darker purple on hover */
-            --chat-shadow-color: #FFD700; /* Gold for chat glow */
+            --chat-bg-color: #A020F0;
+            --chat-hover-color: #8A2BE2;
+            --chat-shadow-color: #FFD700;
+
+            /* New Intro Colors */
+            --duck-purple-glow: #EE82EE; /* Violet / lighter purple for glow */
+            --duck-purple-base: #8A2BE2; /* Blue Violet / deeper purple */
         }
 
         body {
             margin: 0;
-            /* Keep existing background gradient */
             background: linear-gradient(135deg, var(--bg-dark-blue), var(--bg-dark-purple));
-            overflow: hidden;
+            overflow: hidden; /* Hide scrollbar during intro */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             font-family: 'Roboto', sans-serif;
             color: var(--text-color-primary);
-            position: relative; /* Ensure body is relative for absolute positioning of icons and pseudo-element */
+            position: relative;
         }
 
-        /* Pseudo-element for the dimmed background image */
         body::before {
             content: '';
-            position: fixed; /* Fixed so it covers the whole viewport */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -64,9 +63,9 @@
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-            filter: brightness(0.4) grayscale(0.6); /* Dim and slightly desaturate the image */
-            opacity: 0.7; /* Further dimming by making it slightly transparent */
-            z-index: -2; /* Place it behind the existing gradient and canvas (which is z-index: -1) */
+            filter: brightness(0.4) grayscale(0.6);
+            opacity: 0.7;
+            z-index: -2;
         }
 
         canvas {
@@ -75,7 +74,145 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* This will be on top of the new background image (-2) */
+            z-index: -1;
+        }
+
+        /* Intro Overlay */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Highest z-index */
+            overflow: hidden;
+            opacity: 1; /* Start visible */
+            transition: opacity 1s ease-out;
+            flex-direction: column; /* Allow duck and text to stack */
+        }
+
+        #duck-walker {
+            width: 100px; /* Base size for the duck */
+            height: 100px;
+            position: relative; /* For pseudo-elements */
+            opacity: 0; /* Start invisible */
+            animation: duck-fade-in 1s forwards ease-out,
+                       duck-pulse 1s 1s infinite alternate, /* Starts after fade in */
+                       duck-fade-out 1s 3.5s forwards ease-out; /* Starts after a delay */
+            margin-bottom: 30px; /* Space between duck and title */
+        }
+
+        /* Generic Duck Shape using CSS */
+        #duck-walker::before { /* Body */
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 70%;
+            background-color: var(--duck-purple-base);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-10%); /* Slight body offset */
+            filter: drop-shadow(0 0 8px var(--duck-purple-glow)) drop-shadow(0 0 15px var(--duck-purple-glow));
+        }
+
+        #duck-walker::after { /* Head */
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            background-color: var(--duck-purple-base);
+            border-radius: 50%;
+            top: -10%;
+            right: 0;
+            transform: rotate(-15deg); /* Neck bend */
+            filter: drop-shadow(0 0 8px var(--duck-purple-glow)) drop-shadow(0 0 15px var(--duck-purple-glow));
+        }
+
+        /* Optional: Small beak */
+        #duck-walker::before { /* Add to the body part after existing properties */
+            /* ... existing body properties ... */
+            box-shadow: inset 0 0 0 5px orange; /* Represents a beak-like glow effect */
+        }
+
+
+        #intro-title-container {
+            display: flex; /* Arrange letters horizontally */
+            position: relative; /* Allow letters to flow naturally within flex container */
+            z-index: 1001;
+        }
+
+        .intro-letter {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem; /* Slightly smaller for better fit */
+            font-weight: 700;
+            color: transparent; /* Start transparent */
+            opacity: 0;
+            transition: opacity 0.3s ease-out, transform 0.5s ease-out, filter 0.5s ease-out;
+            white-space: pre; /* Preserve space for ' ' in 'Vita Anatis' */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0); /* Start without glow */
+            padding: 0 5px; /* Spacing between letters */
+        }
+
+        .intro-letter.active {
+            opacity: 1;
+            color: white; /* Appear as white text */
+        }
+
+        .intro-letter.glowing {
+            text-shadow: 0 0 10px var(--duck-purple-glow), 0 0 20px var(--duck-purple-glow), 0 0 30px var(--duck-purple-base);
+        }
+
+        .duck-particle {
+            position: absolute;
+            font-size: 1.5rem; /* Size of small ducks */
+            opacity: 0;
+            filter: drop-shadow(0 0 5px var(--duck-purple-glow));
+            pointer-events: none; /* Make them unclickable */
+            /* Custom duck particle shape */
+            width: 25px; /* Small duck base size */
+            height: 25px;
+        }
+
+        .duck-particle::before { /* Body */
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 70%;
+            background-color: var(--duck-purple-base);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-10%);
+            filter: drop-shadow(0 0 3px var(--duck-purple-glow));
+        }
+        .duck-particle::after { /* Head */
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            background-color: var(--duck-purple-base);
+            border-radius: 50%;
+            top: -10%;
+            right: 0;
+            transform: rotate(-15deg);
+            filter: drop-shadow(0 0 3px var(--duck-purple-glow));
+        }
+
+
+        /* Main content styling adjustments */
+        #main-content {
+            display: none; /* Controlled by JS */
+            opacity: 0; /* Fade in */
+            transition: opacity 1s ease-in;
+            display: flex; /* Use flexbox for vertical fill */
+            flex-direction: column;
+            min-height: 100vh; /* Ensure it fills screen vertically */
+            position: relative; /* For the absolute positioned icons */
         }
 
         .header {
@@ -98,7 +235,7 @@
         }
 
         .clock-container-wrapper {
-            flex: 1;
+            flex: 1; /* This will make the clock container take available space */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -118,7 +255,7 @@
             color: white;
             text-align: center;
             display: flex;
-            flex-direction: column; /* Changed to column to stack elements vertically */
+            flex-direction: column;
             align-items: center;
             max-width: 90%;
         }
@@ -127,16 +264,15 @@
             font-size: clamp(2.5em, 7vw, 4.5em);
             text-shadow: 0 0 20px var(--accent-color-light), 0 0 30px var(--accent-color-dark);
             animation: pulseGlow 2s infinite alternate;
-            margin-bottom: 5px; /* Added margin to separate from the email */
+            margin-bottom: 5px;
         }
 
         .email-address {
-            font-size: 0.8em; /* Smaller font size for the email */
-            color: var(--text-color-secondary); /* Using a secondary text color or a custom one */
-            margin-top: 0; /* Remove default top margin */
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); /* Subtle text shadow for glow */
+            font-size: 0.8em;
+            color: var(--text-color-secondary);
+            margin-top: 0;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
         }
-
 
         @keyframes pulseGlow {
             from { text-shadow: 0 0 15px var(--accent-color-light), 0 0 25px var(--accent-color-dark); }
@@ -155,6 +291,8 @@
             justify-content: center;
             gap: 12px;
             box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.6);
+            /* This ensures the banner is at the bottom when flex-direction is column */
+            margin-top: auto;
         }
 
         .banner button {
@@ -194,61 +332,59 @@
             left: 100%;
         }
 
-        /* Discord Icon Styling */
         .discord-link {
-            position: absolute; /* Position relative to the body */
-            top: 20px; /* Distance from top */
-            right: 20px; /* Distance from right */
-            z-index: 102; /* Ensure it's above other content */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px; /* Size of the clickable area */
-            height: 60px;
-            background-color: var(--discord-purple); /* Base Discord purple */
-            border-radius: 50%; /* Make it circular */
-            box-shadow: 0 0 15px var(--discord-purple), 0 0 30px var(--accent-color-light); /* Purple and light accent glow */
-            transition: all 0.3s ease;
-        }
-
-        .discord-link:hover {
-            transform: scale(1.1) rotate(5deg); /* Slightly larger and rotated on hover */
-            background-color: var(--discord-dark-purple); /* Darker purple on hover */
-            box-shadow: 0 0 25px var(--discord-dark-purple), 0 0 40px var(--accent-color-light); /* Stronger glow on hover */
-        }
-
-        .discord-link svg {
-            width: 35px; /* Size of the SVG icon */
-            height: 35px;
-            fill: white; /* White icon fill */
-            transition: fill 0.3s ease;
-        }
-
-        .discord-link:hover svg {
-            fill: #E0E0E0; /* Slightly off-white on hover */
-        }
-
-        /* Chat Link Styling */
-        .chat-link {
             position: absolute;
-            top: 20px; /* Same top as Discord */
-            right: 90px; /* Position to the left of Discord icon (60px width + 10px spacing + 20px right margin) */
+            top: 20px;
+            right: 20px;
             z-index: 102;
             display: flex;
             align-items: center;
             justify-content: center;
             width: 60px;
             height: 60px;
-            background-color: var(--chat-bg-color); /* Chat purple */
+            background-color: var(--discord-purple);
             border-radius: 50%;
-            box-shadow: 0 0 15px var(--chat-bg-color), 0 0 30px var(--chat-shadow-color); /* Purple and gold glow */
+            box-shadow: 0 0 15px var(--discord-purple), 0 0 30px var(--accent-color-light);
+            transition: all 0.3s ease;
+        }
+
+        .discord-link:hover {
+            transform: scale(1.1) rotate(5deg);
+            background-color: var(--discord-dark-purple);
+            box-shadow: 0 0 25px var(--discord-dark-purple), 0 0 40px var(--accent-color-light);
+        }
+
+        .discord-link svg {
+            width: 35px;
+            height: 35px;
+            fill: white;
+            transition: fill 0.3s ease;
+        }
+
+        .discord-link:hover svg {
+            fill: #E0E0E0;
+        }
+
+        .chat-link {
+            position: absolute;
+            top: 20px;
+            right: 90px;
+            z-index: 102;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: var(--chat-bg-color);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--chat-bg-color), 0 0 30px var(--chat-shadow-color);
             transition: all 0.3s ease;
         }
 
         .chat-link:hover {
-            transform: scale(1.1) rotate(-5deg); /* Slightly larger and rotated on hover, opposite direction */
-            background-color: var(--chat-hover-color); /* Darker purple on hover */
-            box-shadow: 0 0 25px var(--chat-hover-color), 0 0 40px var(--chat-shadow-color); /* Stronger glow on hover */
+            transform: scale(1.1) rotate(-5deg);
+            background-color: var(--chat-hover-color);
+            box-shadow: 0 0 25px var(--chat-hover-color), 0 0 40px var(--chat-shadow-color);
         }
 
         .chat-link svg {
@@ -259,108 +395,110 @@
         }
 
         .chat-link:hover svg {
-            fill: #FFD700; /* Gold fill on hover for chat icon */
+            fill: #FFD700;
         }
 
-
-        /* Responsive adjustments */
         @media (max-width: 768px) {
-            .header {
-                font-size: 1.2em;
-                padding: 8px 15px;
-            }
-            #main-heading {
-                font-size: clamp(2em, 8vw, 3.5em);
-            }
-            .email-address {
-                font-size: 0.7em; /* Make email smaller on mobile */
-            }
-            .clock-container {
-                padding: 25px 30px;
-            }
-            .banner {
-                padding: 10px;
-                gap: 8px;
-            }
-            .banner button {
-                padding: 10px 15px;
-                font-size: 0.9em;
-            }
-            .discord-link {
-                width: 45px; /* Smaller icon on mobile */
-                height: 45px;
-                top: 10px;
-                right: 10px;
-            }
-            .discord-link svg {
-                width: 25px;
-                height: 25px;
-            }
-            .chat-link {
-                width: 45px; /* Smaller icon on mobile */
-                height: 45px;
-                top: 10px;
-                right: 65px; /* Adjust right position for mobile */
-            }
-            .chat-link svg {
-                width: 25px;
-                height: 25px;
-            }
+            .header { font-size: 1.2em; padding: 8px 15px; }
+            #main-heading { font-size: clamp(2em, 8vw, 3.5em); }
+            .email-address { font-size: 0.7em; }
+            .clock-container { padding: 25px 30px; }
+            .banner { padding: 10px; gap: 8px; }
+            .banner button { padding: 10px 15px; font-size: 0.9em; }
+            .discord-link, .chat-link { width: 45px; height: 45px; top: 10px; }
+            .discord-link { right: 10px; }
+            .chat-link { right: 65px; }
+            .discord-link svg, .chat-link svg { width: 25px; height: 25px; }
+            #duck-walker { transform: scale(0.7); margin-bottom: 20px; } /* Smaller duck on mobile */
+            .intro-letter { font-size: 3.5rem; padding: 0 2px; }
+            .duck-particle { transform: scale(0.7); }
         }
         @media (max-width: 480px) {
-            .banner button {
-                width: calc(50% - 16px);
-            }
+            .banner button { width: calc(50% - 16px); }
+        }
+
+        /* Intro Animations */
+        @keyframes duck-fade-in {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes duck-pulse {
+            from { transform: scale(1); filter: drop-shadow(0 0 8px var(--duck-purple-glow)) drop-shadow(0 0 15px var(--duck-purple-glow)); }
+            to { transform: scale(1.1); filter: drop-shadow(0 0 15px var(--duck-purple-glow)) drop-shadow(0 0 30px var(--duck-purple-glow)); }
+        }
+
+        @keyframes duck-fade-out {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.5); }
+        }
+
+        @keyframes letter-appear {
+            from { opacity: 0; transform: translateY(20px) scale(0.8); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes duck-burst-fly {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--dx), var(--dy)) scale(0.5); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <a href="https://discord.gg/ysxZmhKp" target="_blank" class="discord-link" aria-label="Join our Discord server">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 245 240">
-            <path d="M104.4 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1.1-6.1-4.5-11.1-10.2-11.1zM140.9 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1s-4.5-11.1-10.2-11.1z"/>
-            <path d="M189.5 20h-134C44.2 20 35 29.2 35 40.6v135.2c0 11.4 9.2 20.6 20.5 20.6h113.4l-5.3 18.2c-1.3 4.4 1.4 9.1 5.8 10.4 4.4 1.3 9.1-1.4 10.4-5.8l5.4-18.7c-4.7-.7-9.4-1.9-14-3.8l-1.4-1.1-3.2-2.5c-2-.3-4-.4-6-.4h-1.6c-4.2 0-8.2-.7-12-2.1-4.5 4.3-9.4 7.6-14.7 9.8 13.9 4.3 28.2 6.7 42.7 6.7s28.9-2.4 42.7-6.7c-5.3-2.2-10.2-5.5-14.7-9.8-3.8 1.4-7.9 2.1-12.1 2.1-2.1 0-4-.1-6.1-.4l-3.2 2.5-1.4 1.1c-4.6 1.9-9.3 3.1-14 3.8l5.4 18.7c1.3 4.4 6 7.1 10.4 5.8 4.4-1.3 7.1-6 5.8-10.4l-5.3-18.2h11.7c11.4 0 20.6-9.2 20.6-20.6V40.6C210.1 29.2 200.9 20 189.5 20zM92.7 151.7c-4.7 0-8.4-4.2-8.4-9.3 0-5.1 3.8-9.3 8.4-9.3 4.7 0 8.4 4.2 8.4 9.3 0 5.1-3.7 9.3-8.4 9.3zm59.6 0c-4.7 0-8.4-4.2-8.4-9.3 0-5.1 3.8-9.3 8.4-9.3 4.7 0 8.4 4.2 8.4 9.3 0 5.1-3.7 9.3-8.4 9.3z"/>
-        </svg>
-    </a>
+    <div id="intro-overlay">
+        <div id="duck-walker"></div>
+        <div id="intro-title-container">
+            </div>
+    </div>
 
-    <a href="https://blipchatv2.onrender.com" target="_blank" class="chat-link" aria-label="Join our Chat server">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-        </svg>
-    </a>
-    
+    <div id="main-content">
+        <a href="https://discord.gg/ysxZmhKp" target="_blank" class="discord-link" aria-label="Join our Discord server">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 245 240">
+                <path d="M104.4 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1.1-6.1-4.5-11.1-10.2-11.1zM140.9 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1s-4.5-11.1-10.2-11.1z"/>
+                <path d="M189.5 20h-134C44.2 20 35 29.2 35 40.6v135.2c0 11.4 9.2 20.6 20.5 20.6h113.4l-5.3 18.2c-1.3 4.4 1.4 9.1 5.8 10.4 4.4 1.3 9.1-1.4 10.4-5.8l5.4-18.7c-4.7-.7-9.4-1.9-14-3.8l-1.4-1.1-3.2-2.5c-2-.3-4-.4-6-.4h-1.6c-4.2 0-8.2-.7-12-2.1-4.5 4.3-9.4 7.6-14.7 9.8 13.9 4.3 28.2 6.7 42.7 6.7s28.9-2.4 42.7-6.7c-5.3-2.2-10.2-5.5-14.7-9.8-3.8 1.4-7.9 2.1-12.1 2.1-2.1 0-4-.1-6.1-.4l-3.2 2.5-1.4 1.1c-4.6 1.9-9.3 3.1-14 3.8l5.4 18.7c1.3 4.4 6 7.1 10.4 5.8 4.4-1.3 7.1-6 5.8-10.4l-5.3-18.2h11.7c11.4 0 20.6-9.2 20.6-20.6V40.6C210.1 29.2 200.9 20 189.5 20zM92.7 151.7c-4.7 0-8.4-4.2-8.4-9.3 0-5.1 3.8-9.3 8.4-9.3 4.7 0 8.4 4.2 8.4 9.3 0 5.1-3.7 9.3-8.4 9.3zm59.6 0c-4.7 0-8.4-4.2-8.4-9.3 0-5.1 3.8-9.3 8.4-9.3 4.7 0 8.4 4.2 8.4 9.3 0 5.1-3.7 9.3-8.4 9.3z"/>
+            </svg>
+        </a>
 
-    <div class="header">
-        <div id="top-left-clock"></div>
-        <div id="battery-status">
-            <span id="battery-level"></span>
-            <span class="battery-icon"></span>
+        <a href="https://blipchatv2.onrender.com" target="_blank" class="chat-link" aria-label="Join our Chat server">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+            </svg>
+        </a>
+        
+        <div class="header">
+            <div id="top-left-clock"></div>
+            <div id="battery-status">
+                <span id="battery-level"></span>
+                <span class="battery-icon"></span>
+            </div>
         </div>
-    </div>
 
-    <div class="clock-container-wrapper">
-        <div class="clock-container">
-            <div id="main-heading">VitaAnatis</div>
-            <p class="email-address">a683company@gmail.com</p> </div>
-    </div>
+        <div class="clock-container-wrapper">
+            <div class="clock-container">
+                <div id="main-heading">VitaAnatis</div>
+                <p class="email-address">a683company@gmail.com</p>
+            </div>
+        </div>
 
-    <div class="banner">
-        <button onclick="window.open('https://vitaanatis.github.io/aboutblank', '_blank')">About:Blank</button>
-        <button onclick="window.open('https://vitaanatis.github.io/gaming-escape/games', '_blank')">Gaming Escape</button>
-        <button onclick="window.open('https://vitaanatis.github.io/uc/games/games.html', '_blank')">Unblocked Cave</button>
-        <button onclick="window.open('https://vitaanatis.github.io/3kh0', '_blank')">3kh0</button>
-        <button onclick="window.open('https://vitaanatis.github.io/tgh', '_blank')">Gamehub</button>
-        <button onclick="window.open('https://vitaanatis.github.io/incredible-website', '_blank')">Incredible Website</button>
-        <button onclick="window.open('https://vitaanatis.github.io/hub-pro', '_blank')">Hub Pro</button>
-        <button onclick="window.open('https://vitaanatis.github.io/rena-hub', '_blank')">RenaHub</button>
-        <button onclick="window.open('https://vitaanatis.github.io/opium/index.html', '_blank')">Opium</button>
-        <button onclick="window.open('https://vitaanatis.github.io/boredashell/index.html', '_blank')">BoredAsHell</button>
-        <button onclick="window.open('https://vitaanatis.github.io/evowars', '_blank')">Evowars</button>
-        <button onclick="window.open('https://vitaanatis.github.io/strongdog', '_blank')">StrongDog XP</button>
-        <button onclick="window.open('https://vitaanatis.github.io/hypackel/staticproxy/index.html', '_blank')">Hypackel</button>
-        <button onclick="window.open('https://vitaanatis.github.io/ccported', '_blank')">CCPorted+ (Not working)</button>
-    </div>
+        <div class="banner">
+            <button onclick="window.open('https://vitaanatis.github.io/aboutblank', '_blank')">About:Blank</button>
+            <button onclick="window.open('https://vitaanatis.github.io/gaming-escape/games', '_blank')">Gaming Escape</button>
+            <button onclick="window.open('https://vitaanatis.github.io/uc/games/games.html', '_blank')">Unblocked Cave</button>
+            <button onclick="window.open('https://vitaanatis.github.io/3kh0', '_blank')">3kh0</button>
+            <button onclick="window.open('https://vitaanatis.github.io/tgh', '_blank')">Gamehub</button>
+            <button onclick="window.open('https://vitaanatis.github.io/incredible-website', '_blank')">Incredible Website</button>
+            <button onclick="window.open('https://vitaanatis.github.io/hub-pro', '_blank')">Hub Pro</button>
+            <button onclick="window.open('https://vitaanatis.github.io/rena-hub', '_blank')">RenaHub</button>
+            <button onclick="window.open('https://vitaanatis.github.io/opium/index.html', '_blank')">Opium</button>
+            <button onclick="window.open('https://vitaanatis.github.io/boredashell/index.html', '_blank')">BoredAsHell</button>
+            <button onclick="window.open('https://vitaanatis.github.io/evowars', '_blank')">Evowars</button>
+            <button onclick="window.open('https://vitaanatis.github.io/strongdog', '_blank')">StrongDog XP</button>
+            <button onclick="window.open('https://vitaanatis.github.io/hypackel/staticproxy/index.html', '_blank')">Hypackel</button>
+            <button onclick="window.open('https://vitaanatis.github.io/ccported', '_blank')">CCPorted+ (Not working)</button>
+        </div>
 
-    <canvas id="canvas"></canvas>
+        <canvas id="canvas"></canvas>
+    </div>
 
     <script>
         const canvas = document.getElementById('canvas');
@@ -401,10 +539,9 @@
 
                     batteryLevelElement.textContent = `${batteryLevel}%`;
 
-                    // Update battery icon based on level and charging status
                     if (batteryCharging) {
-                        batteryIconElement.innerHTML = '&#9741;'; // Charging icon (lightning bolt or similar)
-                        batteryIconElement.style.color = '#76FF03'; // Green for charging
+                        batteryIconElement.innerHTML = '&#9741;'; // Charging icon
+                        batteryIconElement.style.color = '#76FF03';
                     } else if (batteryLevel > 75) {
                         batteryIconElement.innerHTML = '&#128267;'; // Full battery icon
                         batteryIconElement.style.color = '#76FF03';
@@ -417,12 +554,11 @@
                     }
                 });
             } else {
-                // Hide battery status if not supported
                 document.getElementById('battery-status').style.display = 'none';
             }
         }
         setInterval(updateTopClockAndBattery, 1000);
-        updateTopClockAndBattery(); // Initial call
+        updateTopClockAndBattery();
 
         // --- Ripple Effect Logic ---
         function createRipple() {
@@ -529,6 +665,135 @@
 
         initParticles();
         animateParticles();
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const introOverlay = document.getElementById('intro-overlay');
+            const duckWalker = document.getElementById('duck-walker');
+            const introTitleContainer = document.getElementById('intro-title-container');
+            const mainContent = document.getElementById('main-content');
+            const siteTitle = "Vita Anatis";
+            const letterElements = [];
+
+            // Hide main content initially
+            mainContent.style.display = 'none';
+
+            // Create letter elements
+            siteTitle.split('').forEach(char => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.classList.add('intro-letter');
+                introTitleContainer.appendChild(span);
+                letterElements.push(span);
+            });
+
+            // Timings for intro animation
+            const duckFadeInDuration = 1000; // 1 second
+            const duckPulseDuration = 1000; // 1 second
+            const duckFadeOutDuration = 1000; // 1 second
+            const duckTotalPresence = duckFadeInDuration + duckPulseDuration + duckFadeOutDuration; // 3 seconds
+
+            const letterDropDelay = 80; // Delay between each letter appearing
+            const letterGlowDuration = 500; // How long each letter glows
+            const totalLetterDropTime = letterElements.length * letterDropDelay;
+
+            // Start intro sequence after a brief delay for initial rendering
+            setTimeout(() => {
+                // The duck animation is now purely CSS, it will start automatically
+                // We just need to manage the sequence after the duck fades out.
+                setTimeout(() => {
+                    // Duck has faded out, now start letters
+                    let currentLetterIndex = 0;
+                    const dropNextLetter = () => {
+                        if (currentLetterIndex < letterElements.length) {
+                            const letter = letterElements[currentLetterIndex];
+                            letter.style.animation = `letter-appear 0.5s ease-out forwards`;
+                            letter.classList.add('active'); // Make visible and white
+                            currentLetterIndex++;
+                            setTimeout(dropNextLetter, letterDropDelay);
+                        } else {
+                            // All letters dropped, now make them glow and burst
+                            setTimeout(startLetterGlowAndBurst, 500); // Small delay before glowing
+                        }
+                    };
+                    dropNextLetter();
+                }, duckTotalPresence); // This timeout waits for the duck's entire animation to complete
+            }, 100); // Initial slight delay before starting the whole intro sequence
+
+
+            function startLetterGlowAndBurst() {
+                let glowIndex = 0;
+                const glowNextLetter = () => {
+                    if (glowIndex < letterElements.length) {
+                        const letter = letterElements[glowIndex];
+                        letter.classList.add('glowing');
+                        setTimeout(() => {
+                            letter.classList.remove('glowing');
+                            // Now burst into little ducks
+                            createDuckBurst(letter);
+                            letter.style.opacity = 0; // Make original letter disappear
+                        }, letterGlowDuration);
+                        glowIndex++;
+                        setTimeout(glowNextLetter, letterGlowDuration / 2); // Stagger glow slightly
+                    } else {
+                        // All letters have burst, fade out overlay and show main content
+                        setTimeout(() => {
+                            introOverlay.style.opacity = 0;
+                            setTimeout(() => {
+                                introOverlay.style.display = 'none';
+                                mainContent.style.display = 'flex'; // Change to flex to use column layout
+                                // Ensure the main content uses the full height
+                                document.body.style.overflow = 'auto'; // Re-enable scrolling
+                                // Set opacity for a smooth fade-in for main content
+                                mainContent.style.opacity = 1;
+                            }, 1000); // Match intro-overlay transition duration
+                        }, 500); // Small delay after last burst
+                    }
+                };
+                glowNextLetter();
+            }
+
+            function createDuckBurst(letterElement) {
+                const rect = letterElement.getBoundingClientRect();
+                const numDucks = 8; // Number of small ducks per letter
+
+                for (let i = 0; i < numDucks; i++) {
+                    const duckParticle = document.createElement('div');
+                    // Removed textContent='🦆' as we're using CSS for the shape
+                    duckParticle.classList.add('duck-particle');
+                    
+                    // Position relative to the center of the letter
+                    duckParticle.style.left = `${rect.left + rect.width / 2}px`;
+                    duckParticle.style.top = `${rect.top + rect.height / 2}px`;
+                    
+                    // Randomize direction and distance
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = Math.random() * 80 + 30; // Between 30px and 110px
+                    const dx = Math.cos(angle) * distance;
+                    const dy = Math.sin(angle) * distance;
+
+                    // Set CSS variables for animation
+                    duckParticle.style.setProperty('--dx', `${dx}px`);
+                    duckParticle.style.setProperty('--dy', `${dy}px`);
+                    
+                    // Randomize animation duration and delay
+                    const animationDuration = 0.7 + Math.random() * 0.6; // 0.7s to 1.3s
+                    const animationDelay = Math.random() * 0.2; // 0s to 0.2s
+                    
+                    duckParticle.style.animation = `duck-burst-fly ${animationDuration}s ease-out ${animationDelay}s forwards`;
+                    
+                    introOverlay.appendChild(duckParticle);
+
+                    // Remove the duck particle after its animation
+                    setTimeout(() => {
+                        if (duckParticle.parentNode) {
+                            duckParticle.parentNode.removeChild(duckParticle);
+                        }
+                    }, (animationDuration + animationDelay) * 1000 + 100);
+                }
+            }
+        });
     </script>
 </body>
 </html>
