@@ -101,8 +101,8 @@
             position: relative; /* For pseudo-elements */
             opacity: 0; /* Start invisible */
             animation: duck-fade-in 1s forwards ease-out,
-                       duck-pulse 1s 1s infinite alternate, /* Starts after fade in */
-                       duck-fade-out 1s 3.5s forwards ease-out; /* Starts after a delay */
+                       duck-float 2s 1s infinite alternate ease-in-out, /* Starts after fade in */
+                       duck-fade-out 1s 4s forwards ease-out; /* Starts after a delay (1s fade-in + 2s float + 1s buffer) */
             margin-bottom: 30px; /* Space between duck and title */
         }
 
@@ -133,17 +133,16 @@
             filter: drop-shadow(0 0 8px var(--duck-purple-glow)) drop-shadow(0 0 15px var(--duck-purple-glow));
         }
 
-        /* Optional: Small beak */
-        #duck-walker::before { /* Add to the body part after existing properties */
-            /* ... existing body properties ... */
+        /* Small beak effect - now part of the body's shadow for a glowy look */
+        #duck-walker::before {
             box-shadow: inset 0 0 0 5px orange; /* Represents a beak-like glow effect */
         }
-
 
         #intro-title-container {
             display: flex; /* Arrange letters horizontally */
             position: relative; /* Allow letters to flow naturally within flex container */
             z-index: 1001;
+            perspective: 1000px; /* For 3D transformations */
         }
 
         .intro-letter {
@@ -156,26 +155,27 @@
             white-space: pre; /* Preserve space for ' ' in 'Vita Anatis' */
             text-shadow: 0 0 10px rgba(255, 255, 255, 0); /* Start without glow */
             padding: 0 5px; /* Spacing between letters */
+            transform-origin: bottom center; /* For bounce effect */
         }
 
         .intro-letter.active {
             opacity: 1;
             color: white; /* Appear as white text */
+            animation: letter-appear 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; /* Bounce effect */
         }
 
         .intro-letter.glowing {
-            text-shadow: 0 0 10px var(--duck-purple-glow), 0 0 20px var(--duck-purple-glow), 0 0 30px var(--duck-purple-base);
+            animation: letter-glow 0.8s forwards; /* Stronger glow animation */
         }
 
         .duck-particle {
             position: absolute;
-            font-size: 1.5rem; /* Size of small ducks */
             opacity: 0;
             filter: drop-shadow(0 0 5px var(--duck-purple-glow));
             pointer-events: none; /* Make them unclickable */
-            /* Custom duck particle shape */
             width: 25px; /* Small duck base size */
             height: 25px;
+            z-index: 1002; /* Ensure particles are above overlay */
         }
 
         .duck-particle::before { /* Body */
@@ -419,28 +419,36 @@
 
         /* Intro Animations */
         @keyframes duck-fade-in {
-            from { opacity: 0; transform: scale(0.5); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: scale(0.5) translateY(50px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        @keyframes duck-pulse {
-            from { transform: scale(1); filter: drop-shadow(0 0 8px var(--duck-purple-glow)) drop-shadow(0 0 15px var(--duck-purple-glow)); }
-            to { transform: scale(1.1); filter: drop-shadow(0 0 15px var(--duck-purple-glow)) drop-shadow(0 0 30px var(--duck-purple-glow)); }
+        @keyframes duck-float {
+            0% { transform: scale(1) translateY(0px) rotate(0deg); }
+            50% { transform: scale(1.05) translateY(-10px) rotate(3deg); }
+            100% { transform: scale(1) translateY(0px) rotate(0deg); }
         }
 
         @keyframes duck-fade-out {
-            from { opacity: 1; transform: scale(1); }
-            to { opacity: 0; transform: scale(0.5); }
+            from { opacity: 1; transform: scale(1) translateY(0); }
+            to { opacity: 0; transform: scale(0.5) translateY(-50px); }
         }
 
         @keyframes letter-appear {
-            from { opacity: 0; transform: translateY(20px) scale(0.8); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            0% { opacity: 0; transform: translateY(50px) scale(0.2); filter: blur(10px); }
+            80% { opacity: 1; transform: translateY(-5px) scale(1.05); filter: blur(0); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        @keyframes letter-glow {
+            0% { text-shadow: 0 0 10px rgba(255, 255, 255, 0), 0 0 20px rgba(255, 255, 255, 0); }
+            50% { text-shadow: 0 0 20px var(--duck-purple-glow), 0 0 40px var(--duck-purple-glow), 0 0 60px var(--duck-purple-base); }
+            100% { text-shadow: 0 0 10px rgba(255, 255, 255, 0), 0 0 20px rgba(255, 255, 255, 0); }
         }
 
         @keyframes duck-burst-fly {
             0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--dx), var(--dy)) scale(0.5); opacity: 0; }
+            100% { transform: translate(var(--dx), var(--dy)) scale(0.2); opacity: 0; }
         }
     </style>
 </head>
@@ -448,7 +456,7 @@
     <div id="intro-overlay">
         <div id="duck-walker"></div>
         <div id="intro-title-container">
-            </div>
+        </div>
     </div>
 
     <div id="main-content">
@@ -549,7 +557,7 @@
                         batteryIconElement.innerHTML = '&#128266;'; // Medium battery icon
                         batteryIconElement.style.color = 'orange';
                     } else {
-                        batteryIconElement.innerHTML = '&#128268;'; // Low battery icon
+                        batteryIconElement.innerHTML = '&#128268'; // Low battery icon
                         batteryIconElement.style.color = 'red';
                     }
                 });
@@ -641,7 +649,7 @@
             for (let a = 0; a < particlesArray.length; a++) {
                 for (let b = a; b < particlesArray.length; b++) {
                     let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
-                                    ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                                     ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
 
                     if (distance < maxConnectionDistance * maxConnectionDistance) {
                         opacityValue = 1 - (distance / (maxConnectionDistance * maxConnectionDistance));
@@ -690,26 +698,24 @@
 
             // Timings for intro animation
             const duckFadeInDuration = 1000; // 1 second
-            const duckPulseDuration = 1000; // 1 second
+            const duckFloatDuration = 2000; // 2 seconds
             const duckFadeOutDuration = 1000; // 1 second
-            const duckTotalPresence = duckFadeInDuration + duckPulseDuration + duckFadeOutDuration; // 3 seconds
+            const duckTotalPresence = duckFadeInDuration + duckFloatDuration + duckFadeOutDuration; // 4 seconds (1s in + 2s float + 1s out)
 
-            const letterDropDelay = 80; // Delay between each letter appearing
-            const letterGlowDuration = 500; // How long each letter glows
-            const totalLetterDropTime = letterElements.length * letterDropDelay;
+            const letterDropDelay = 100; // Delay between each letter appearing
+            const letterGlowDuration = 600; // How long each letter glows
+            const duckBurstDuration = 800; // Duration for each duck particle to fly away
 
             // Start intro sequence after a brief delay for initial rendering
             setTimeout(() => {
-                // The duck animation is now purely CSS, it will start automatically
-                // We just need to manage the sequence after the duck fades out.
+                // Duck animation starts automatically via CSS
                 setTimeout(() => {
                     // Duck has faded out, now start letters
                     let currentLetterIndex = 0;
                     const dropNextLetter = () => {
                         if (currentLetterIndex < letterElements.length) {
                             const letter = letterElements[currentLetterIndex];
-                            letter.style.animation = `letter-appear 0.5s ease-out forwards`;
-                            letter.classList.add('active'); // Make visible and white
+                            letter.classList.add('active'); // Triggers letter-appear animation
                             currentLetterIndex++;
                             setTimeout(dropNextLetter, letterDropDelay);
                         } else {
@@ -724,34 +730,32 @@
 
             function startLetterGlowAndBurst() {
                 let glowIndex = 0;
-                const glowNextLetter = () => {
+                const glowInterval = setInterval(() => {
                     if (glowIndex < letterElements.length) {
                         const letter = letterElements[glowIndex];
                         letter.classList.add('glowing');
+
                         setTimeout(() => {
                             letter.classList.remove('glowing');
-                            // Now burst into little ducks
                             createDuckBurst(letter);
                             letter.style.opacity = 0; // Make original letter disappear
                         }, letterGlowDuration);
+
                         glowIndex++;
-                        setTimeout(glowNextLetter, letterGlowDuration / 2); // Stagger glow slightly
                     } else {
+                        clearInterval(glowInterval);
                         // All letters have burst, fade out overlay and show main content
                         setTimeout(() => {
                             introOverlay.style.opacity = 0;
                             setTimeout(() => {
                                 introOverlay.style.display = 'none';
                                 mainContent.style.display = 'flex'; // Change to flex to use column layout
-                                // Ensure the main content uses the full height
                                 document.body.style.overflow = 'auto'; // Re-enable scrolling
-                                // Set opacity for a smooth fade-in for main content
                                 mainContent.style.opacity = 1;
                             }, 1000); // Match intro-overlay transition duration
                         }, 500); // Small delay after last burst
                     }
-                };
-                glowNextLetter();
+                }, letterGlowDuration / 2); // Stagger glow slightly
             }
 
             function createDuckBurst(letterElement) {
@@ -760,37 +764,33 @@
 
                 for (let i = 0; i < numDucks; i++) {
                     const duckParticle = document.createElement('div');
-                    // Removed textContent='🦆' as we're using CSS for the shape
                     duckParticle.classList.add('duck-particle');
-                    
-                    // Position relative to the center of the letter
-                    duckParticle.style.left = `${rect.left + rect.width / 2}px`;
-                    duckParticle.style.top = `${rect.top + rect.height / 2}px`;
-                    
-                    // Randomize direction and distance
-                    const angle = Math.random() * Math.PI * 2;
-                    const distance = Math.random() * 80 + 30; // Between 30px and 110px
-                    const dx = Math.cos(angle) * distance;
-                    const dy = Math.sin(angle) * distance;
-
-                    // Set CSS variables for animation
-                    duckParticle.style.setProperty('--dx', `${dx}px`);
-                    duckParticle.style.setProperty('--dy', `${dy}px`);
-                    
-                    // Randomize animation duration and delay
-                    const animationDuration = 0.7 + Math.random() * 0.6; // 0.7s to 1.3s
-                    const animationDelay = Math.random() * 0.2; // 0s to 0.2s
-                    
-                    duckParticle.style.animation = `duck-burst-fly ${animationDuration}s ease-out ${animationDelay}s forwards`;
-                    
                     introOverlay.appendChild(duckParticle);
 
-                    // Remove the duck particle after its animation
-                    setTimeout(() => {
-                        if (duckParticle.parentNode) {
-                            duckParticle.parentNode.removeChild(duckParticle);
-                        }
-                    }, (animationDuration + animationDelay) * 1000 + 100);
+                    // Random initial position around the letter
+                    const startX = rect.left + rect.width / 2 + (Math.random() * 20 - 10);
+                    const startY = rect.top + rect.height / 2 + (Math.random() * 20 - 10);
+                    duckParticle.style.left = `${startX}px`;
+                    duckParticle.style.top = `${startY}px`;
+
+                    // Random direction and distance for flying off
+                    const angle = Math.random() * Math.PI * 2; // Full circle
+                    const distance = Math.random() * 200 + 100; // 100 to 300px away
+                    const endX = startX + distance * Math.cos(angle);
+                    const endY = startY + distance * Math.sin(angle);
+
+                    // Set CSS variables for animation
+                    duckParticle.style.setProperty('--dx', `${endX - startX}px`);
+                    duckParticle.style.setProperty('--dy', `${endY - startY}px`);
+
+                    // Animate the duck particle
+                    duckParticle.style.animation = `duck-burst-fly ${duckBurstDuration / 1000}s ease-out forwards`;
+                    duckParticle.style.opacity = 1; // Make visible for animation
+
+                    // Remove after animation
+                    duckParticle.addEventListener('animationend', () => {
+                        duckParticle.remove();
+                    });
                 }
             }
         });
