@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vote for A683 Services</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./style.css"> </head>
+<body>
+    <h1>Vote for A683 Services</h1>
+
+    <div class="container mb-8">
+        <h2 class="section-title">Admin Panel</h2>
+        <div class="flex flex-col sm:flex-row items-center gap-4">
+            <input type="password" id="admin-password-input" placeholder="Enter Admin Password" class="input-field flex-grow">
+            <button id="create-survey-button" class="button-primary whitespace-nowrap">📜 Create Survey</button>
+        </div>
+        <p id="admin-message" class="text-sm text-red-600 mt-2 text-center"></p>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">Active Polls</h2>
+        <div id="polls-container">
+            <p class="text-gray-600 text-center">Loading polls...</p>
+        </div>
+    </div>
+
+    <div id="survey-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-survey-modal">&times;</span>
+            <h2 class="section-title">Create New Survey</h2>
+            <div class="mb-4">
+                <label for="poll-question-input" class="block text-sm font-medium text-gray-700 mb-1">Survey Question:</label>
+                <input type="text" id="poll-question-input" class="input-field" placeholder="e.g., What is your favorite A683 service?">
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Question Type:</label>
+                <div class="flex gap-4">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="poll-type" value="multiple_choice" checked class="form-radio text-blue-600" id="radio-multiple-choice">
+                        <span class="ml-2 text-gray-800">Make multiple choice</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="poll-type" value="text_message" class="form-radio text-blue-600" id="radio-text-message">
+                        <span class="ml-2 text-gray-800">Make text message</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="multiple-choice-options" class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Options (one per line):</label>
+                <textarea id="poll-options-textarea" class="input-field h-32 resize-y" placeholder="Option 1&#10;Option 2&#10;Option 3"></textarea>
+                <p class="text-sm text-gray-500 mt-1">Separate options by new lines.</p>
+            </div>
+            
+            <button id="submit-new-poll-button" class="button-primary w-full">Submit New Poll</button>
+            <p id="poll-creation-message" class="text-sm text-red-600 mt-2 text-center"></p>
+        </div>
+    </div>
+
+    <script src="./script.js"></script> </body>
+</html>
